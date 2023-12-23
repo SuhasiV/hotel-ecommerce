@@ -1,0 +1,26 @@
+.label {
+  cursor: pointer;
+  width: 100px;
+  text-align: right;
+}
+
+.hideLabel {
+  display: none;
+}
+
+.options {
+  width: 100px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.option {
+  padding: 10px 20px;
+  border-bottom: solid 1px #b3b0b0;
+  cursor: pointer;
+}
+
+.option:hover {
+  color: #fff;
+  background-color: #333;
+}

@@ -1,0 +1,27 @@
+.checkin {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  overflow: hidden;
+}
+.date {
+  position: absolute;
+  top: 60px;
+  z-index: 1;
+}
+.dateHotels {
+  position: absolute;
+  top: 125px;
+  left: 10px;
+  z-index: 1;
+}
+.dateHome {
+  position: absolute;
+  top: 60px;
+  z-index: 1;
+}
+.icon {
+  font-size: 16px;
+}

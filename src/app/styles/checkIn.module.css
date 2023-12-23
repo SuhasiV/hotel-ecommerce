@@ -1,0 +1,110 @@
+.container {
+  background-color: #fff;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  position: absolute;
+  margin-top: -100px;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+}
+.checkin {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+.location,
+.adults,
+.children,
+.room,
+.checknow {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+.location,
+.checkin,
+.checkout,
+.adults,
+.children,
+.room {
+  border-right: solid 1px #333;
+}
+.checknow {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  height: 100%;
+  margin: 0;
+}
+.checknow:hover {
+  background-color: #e1e1e1;
+  color: #333;
+  border-top: solid 3px #333;
+  border-bottom: solid 3px #333;
+}
+
+.adults {
+  align-items: center;
+}
+
+.date {
+  position: absolute;
+  top: 60px;
+  z-index: 1;
+}
+
+.icon {
+  font-size: 16px;
+}
+
+.options {
+  width: 10%;
+  text-align: center;
+  position: absolute;
+  top: 60px;
+  z-index: 1;
+  background-color: #fff;
+  margin: 0px auto;
+  padding: 2px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+.optionCount {
+  margin: 10px;
+}
+
+.optionCount {
+  width: 20px;
+  height: 30px;
+}
+
+.dropdownLabel,
+.lableValue {
+  cursor: pointer;
+}
+
+.doneButton {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #333;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px;
+  margin: 0;
+}
+.doneButton:hover {
+  background-color: #fff;
+  border: solid 1px #333;
+  color: #333;
+}
