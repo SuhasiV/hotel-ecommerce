@@ -1,0 +1,66 @@
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+.item > input {
+  border: none;
+  height: 25px;
+  padding: 5px;
+}
+
+.calender {
+  height: 25px;
+  padding: 5px;
+  background-color: #fff;
+  color: #000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+.options {
+  padding: 10px;
+}
+.optionType {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.optionType > span {
+  color: #a9a9a9;
+  font-size: 15px;
+}
+.optionType > small {
+  color: #a9a9a9;
+  font-size: 12px;
+}
+.optionType > input {
+  width: 50px;
+  height: 20px;
+  padding: 5px;
+}
+.optionType > select {
+  border: none;
+  height: 30px;
+  padding: 5px;
+}
+.search {
+  width: 100%;
+  height: 40px;
+  background-color: #fff;
+  overflow: hidden;
+  color: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+}
+.search:hover {
+  color: #454040;
+  background-color: #a9a9a9;
+}
