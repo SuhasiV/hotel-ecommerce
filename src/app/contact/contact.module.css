@@ -1,0 +1,56 @@
+.container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.wrapper {
+  max-width: 1200px;
+  width: 100%;
+  height: 100%;
+  margin: 0px auto;
+}
+.pageHeading {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.subHeading {
+  font-size: 22px;
+  text-transform: uppercase;
+  margin-bottom: 0px;
+}
+.heading {
+  font-size: 60px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.info {
+  display: flex;
+  width: 100%;
+  padding: 50px 0px 50px 0px;
+}
+.title {
+  font-size: 50px;
+  color: #000;
+}
+.left {
+  flex: 1;
+  color: rgb(135, 132, 128);
+}
+.left > span {
+  font-size: 16px;
+}
+.right {
+  margin-top: 20px;
+  margin-left: 40px;
+  flex: 1;
+  display: block;
+}
+.form {
+  padding: 0px 20px 20px 20px;
+}
+.right > span {
+  font-size: 30px;
+}
