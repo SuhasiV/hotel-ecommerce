@@ -2,8 +2,6 @@ import dbConn from "@/utils/dbConn";
 import Hotels from "@/models/Hotels";
 import { NextRequest, NextResponse } from "next/server";
 
-dbConn();
-
 //CREATE
 export async function POST(req) {
   try {

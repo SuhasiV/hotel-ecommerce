@@ -39,8 +39,20 @@ export const Nav = () => {
           <Link href="/contact" className={styles.nav_link}>
             Contact
           </Link>
-          <Link href="/" className={styles.nav_link}>
+
+          <Link
+            href="/signup"
+            className={styles.nav_link}
+            style={{ color: "#000" }}
+          >
             <button>Register</button>
+          </Link>
+
+          <Link
+            href="/login"
+            className={styles.nav_link}
+            style={{ color: "#000" }}
+          >
             <button>Login</button>
           </Link>
         </div>
