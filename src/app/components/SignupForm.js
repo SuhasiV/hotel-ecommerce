@@ -1,8 +1,11 @@
 "use client";
 import { useState } from "react";
 import React from "react";
+import { useRouter } from "next/navigation";
 
 const SignupForm = () => {
+  const router = useRouter();
+
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -37,7 +40,7 @@ const SignupForm = () => {
           email: "",
           password: "",
         });
-        setStatus("success");
+        router.push("/login");
       } else {
         setStatus("error");
       }
@@ -84,7 +87,6 @@ const SignupForm = () => {
         />
         <br />
         <div>
-          {status === "success" && <p>Thank you for your message!</p>}
           {status === "error" && <p>There was an error. Please try again.</p>}
 
           <button type="submit">Signup</button>

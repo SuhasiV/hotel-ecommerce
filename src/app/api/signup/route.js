@@ -6,7 +6,7 @@ import bcryptjs from "bcryptjs";
 export async function POST(req) {
   try {
     const reqBody = await req.json();
-    const { email, username, password } = reqBody;
+    const { email, password, ...other } = reqBody;
     await dbConnect();
 
     const user = await User.findOne({ email });
@@ -25,9 +25,9 @@ export async function POST(req) {
     const hashedPassword = await bcryptjs.hash(password, salt);
 
     const newUser = new User({
-      username,
       email,
       password: hashedPassword,
+      ...other,
     });
 
     const savedUser = await newUser.save();
@@ -44,9 +44,6 @@ export async function POST(req) {
     );
   } catch (err) {
     return NextResponse.json(
-      {
-        message: "check route file",
-      },
       {
         error: err.message,
       },

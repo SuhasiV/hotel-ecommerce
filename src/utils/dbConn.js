@@ -2,43 +2,25 @@ import mongoose from "mongoose";
 
 const MONGODB_URL = process.env.MONGODB_URL;
 
-if (!MONGODB_URL) {
-  throw new Error(
-    "Please define the MONGODB_URI environment variable inside .env.local"
-  );
-}
-
-let cached = global.mongoose;
-
-if (!cached) {
-  cached = global.mongoose = { con: null, promise: null };
-}
-
 const dbConnect = async () => {
-  if (cached.conn) {
-    return cached.conn;
-  }
-
-  // If a connection does not exist, we check if a promise is already in progress. If a promise is already in progress, we wait for it to resolve to get the connection
-  if (!cached.promise) {
-    const opts = {
-      bufferCommands: false,
-    };
-
-    cached.promise = mongoose.connect(MONGODB_URL, opts).then((mongoose) => {
-      return mongoose;
-    });
-  }
-
   try {
-    cached.conn = await cached.promise;
-    console.log("Connect to mongoDB");
-  } catch (error) {
-    cached.promise = null;
-    throw error;
-  }
+    mongoose.connect(MONGODB_URL);
+    const connection = mongoose.connection;
 
-  return cached.conn;
+    connection.on("connected", () => {
+      console.log("MongoDB connected successfully");
+    });
+
+    connection.on("error", (err) => {
+      console.log(
+        "MongoDB connection error. Please make sure MongoDB is running. " + err
+      );
+      process.exit();
+    });
+  } catch (error) {
+    console.log("Something goes wrong!");
+    console.log(error);
+  }
 };
 
 export default dbConnect;
