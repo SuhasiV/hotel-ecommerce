@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import styles from "@/app/styles/nav.module.css";
 import Image from "next/image";
+import PersonIcon from "@mui/icons-material/Person";
 
 export const Nav = () => {
   return (
@@ -40,20 +41,8 @@ export const Nav = () => {
             Contact
           </Link>
 
-          <Link
-            href="/signup"
-            className={styles.nav_link}
-            style={{ color: "#000" }}
-          >
-            <button>Register</button>
-          </Link>
-
-          <Link
-            href="/login"
-            className={styles.nav_link}
-            style={{ color: "#000" }}
-          >
-            <button>Login</button>
+          <Link href="/profile" className={styles.nav_link} style={{}}>
+            <PersonIcon />
           </Link>
         </div>
       </div>
