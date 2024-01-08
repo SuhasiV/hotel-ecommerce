@@ -1,18 +1,25 @@
 import Link from "next/link";
-import React from "react";
+import UserProfile from "../components/UserProfile";
 
 const page = () => {
   return (
     <div>
-      <button>
-        <Link href="/login">Login</Link>
-      </button>
-      <button>
-        <Link href="/signup">Signup</Link>
-      </button>
-      <button>
-        <Link href="/logout">logout</Link>
-      </button>
+      <div>
+        <h1>User Profile Details</h1>
+        <UserProfile />
+      </div>
+      <div>
+        <h3>Buttons</h3>
+        <button>
+          <Link href="/profile/login">Login</Link>
+        </button>
+        <button>
+          <Link href="/profile/signup">Signup</Link>
+        </button>
+        <button>
+          <Link href="/profile/logout">logout</Link>
+        </button>
+      </div>
     </div>
   );
 };

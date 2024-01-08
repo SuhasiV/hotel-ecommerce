@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 
 import { SearchItem } from "../components/SearchItem";
 import BookingBox from "../components/BookingBox";
+import Link from "next/link";
 
 const Page = () => {
   //const router = useRouter();
@@ -15,6 +16,7 @@ const Page = () => {
   //  router.query;
   //console.log(destination, startDate);
 
+  // <Link href={`/hotels/${data}`}>{data}</Link>}
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
