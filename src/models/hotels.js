@@ -35,6 +35,16 @@ const hotelSchema = new mongoose.Schema({
   rooms: {
     type: [String],
   },
+  restId: [
+    {
+      type: String,
+    },
+  ],
+  spaId: [
+    {
+      type: String,
+    },
+  ],
   cheapestPrice: {
     type: Number,
     required: true,

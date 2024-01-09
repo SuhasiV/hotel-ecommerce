@@ -19,11 +19,6 @@ export function middleware(request) {
 
 export const config = {
   matcher: [
-    "/",
-    "/about",
-    "/hotels",
-    "/dining",
-    "/spa",
     "/contact",
     "/profile",
     "/profile/signup",
