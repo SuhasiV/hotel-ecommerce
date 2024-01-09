@@ -1,5 +1,6 @@
 import dbConn from "@/utils/dbConn";
 import Hotel from "@/models/Hotels";
+import Room from "@/models/Room";
 import { NextRequest, NextResponse } from "next/server";
 
 //UPDATE
@@ -63,6 +64,41 @@ export async function GET(req, { params }) {
       {
         status: 500,
       }
+    );
+  }
+}
+
+//CREATE ROOM AND UPDATE IN HOTEL
+export async function POST(req, { params }) {
+  const { id } = params;
+  const reqBody = await req.json();
+  await dbConn();
+
+  try {
+    const newRoom = new Room(reqBody);
+    const savedRoom = await newRoom.save();
+
+    try {
+      const updatedHotel = await Hotel.findByIdAndUpdate(id, {
+        $push: { rooms: savedRoom._id },
+      });
+      return NextResponse.json({
+        message: "room created successfully and also updated in hotel",
+      });
+    } catch (err) {
+      return NextResponse.json(
+        {
+          error: err.message,
+        },
+        { status: 501 }
+      );
+    }
+  } catch (err) {
+    return NextResponse.json(
+      {
+        error: err.message,
+      },
+      { status: 500 }
     );
   }
 }

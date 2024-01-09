@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "@/app/styles/singleHotel.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -14,6 +14,17 @@ import BookingBox from "@/app/components/BookingBox";
 import HotelGallery from "@/app/components/HotelGallery";
 
 const Page = () => {
+  useEffect(() => {
+    const handleFetch = async () => {
+      try {
+        // const response = await axios.get("/api/")
+      } catch (err) {
+        console.log("error while extracting individual hotel info", err);
+      }
+    };
+    handleFetch();
+  }, []);
+
   const roomType3 = [
     {
       id: 1,

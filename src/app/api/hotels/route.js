@@ -36,16 +36,16 @@ export async function GET() {
 }
 
 //DELETE
-export async function DELETE(req) {
-  try {
-    const id = await req.nextUrl.searchParams.get("id");
-    await dbConn();
-
-    await Hotels.findByIdAndDelete(id);
-    return NextResponse.json({
-      message: "hotel deleted sucessfully",
-    });
-  } catch (error) {
-    return NextResponse.json({ error: error.message }, { status: 502 });
-  }
-}
+//export async function DELETE(req) {
+//  try {
+//    const id = await req.nextUrl.searchParams.get("id");
+//    await dbConn();
+//
+//    await Hotels.findByIdAndDelete(id);
+//    return NextResponse.json({
+//      message: "hotel deleted sucessfully",
+//    });
+//  } catch (error) {
+//    return NextResponse.json({ error: error.message }, { status: 502 });
+//  }
+//}

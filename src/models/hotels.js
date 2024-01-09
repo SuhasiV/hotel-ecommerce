@@ -20,6 +20,9 @@ const hotelSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  photos: {
+    type: [String],
+  },
   features: {
     type: [String],
     required: true,
@@ -38,6 +41,7 @@ const hotelSchema = new mongoose.Schema({
   },
   isfeatured: {
     type: Boolean,
+    default: false,
   },
 });
 
