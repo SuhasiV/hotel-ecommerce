@@ -1,14 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { CheckinCheckout } from "../components/CheckinCheckout";
 import styles from "@/app/styles/bookingBox.module.css";
 
+import { useSearchParams } from "next/navigation";
+
 const BookingBox = ({ type, roomTypes }) => {
-  console.log(type);
+  const searchParams = useSearchParams();
+
+  const dest = searchParams.get("dest") ?? "null";
+
+  const [destination, setDestination] = useState(dest);
+
   return (
     <div>
       <div className={styles.item}>
         <div className={styles.label}>Name</div>
-        <input type="text" placeholder="Enter your destination" />
+        <input type="text" placeholder={destination} />
       </div>
       <div className={styles.item}>
         <div className={styles.label}>Check In - Check Out</div>

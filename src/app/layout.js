@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { RobotoCondensed } from "@next/font/google";
+
 import "./globals.css";
 import { Nav } from "./components/Nav";
 import { Footer } from "./components/Footer";
@@ -12,14 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      <Head></Head>
       <body>
         <Nav />
         {children}

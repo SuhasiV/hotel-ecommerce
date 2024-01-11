@@ -3,12 +3,22 @@ import styles from "@/app/styles/checkincheckout.module.css";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
+import { useSearchParams } from "next/navigation";
 
 export const CheckinCheckout = ({ type }) => {
+  const searchParams = useSearchParams();
+  const startDateParam = searchParams.get("startDate");
+  const endDateParam = searchParams.get("endDate");
+
+  const initialStartDate = startDateParam
+    ? new Date(startDateParam)
+    : new Date();
+  const initialEndDate = endDateParam ? new Date(endDateParam) : null;
+
   const [date, setDate] = useState([
     {
-      startDate: new Date(),
-      endDate: null,
+      startDate: initialStartDate,
+      endDate: initialEndDate,
       key: "selection",
     },
   ]);

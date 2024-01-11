@@ -11,7 +11,6 @@
   font-size: 18px;
   color: #101740;
   text-transform: uppercase;
-  letter-spacing: 2px;
 }
 
 .heading {
@@ -35,7 +34,6 @@
 .paragraph2 {
   font-size: 16px;
   color: #717171;
-  font-family: roboto;
 }
 
 .images {
