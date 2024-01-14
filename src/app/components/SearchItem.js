@@ -3,7 +3,19 @@ import styles from "@/app/styles/searchItem.module.css";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-export const SearchItem = () => {
+import Link from "next/link";
+
+const truncText = (text, maxLength) => {
+  const words = text.split(" ");
+  if (words.length > maxLength) {
+    return words.slice(0, maxLength).join(" ") + "...";
+  }
+  return text;
+};
+
+export const SearchItem = ({ id, name, add, desc, features }) => {
+  const truncDesc = truncText(desc[0], 15);
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -17,8 +29,8 @@ export const SearchItem = () => {
       </div>
       <div className={styles.right}>
         <div className={styles.box1}>
-          <div className={styles.title}>Imperial Grand Palace</div>
-          <div className={styles.address}>123 Tranquil Lane, Serenity City</div>
+          <div className={styles.title}>{name}</div>
+          <div className={styles.address}>{add}</div>
           <div className={styles.check}>
             <CheckCircleIcon style={{ color: "green" }} />
             <div> Breakfast Included</div>
@@ -31,10 +43,7 @@ export const SearchItem = () => {
             <CheckCircleIcon style={{ color: "green" }} />
             <div> Couple Friendly</div>
           </div>
-          <div className={styles.about}>
-            Experience luxury and opulence at our flagship hotel, featuring
-            spacious suites, gourmet dining, and world-class...
-          </div>
+          <div className={styles.about}>{truncDesc}</div>
         </div>
         <div className={styles.box2}>
           <div className={styles.star}>
@@ -47,7 +56,9 @@ export const SearchItem = () => {
           <div className={styles.bottom}>
             <span className={styles.price}>Rs. 4500</span>
             <small>(include tax and fees)</small>
-            <div className={styles.button}>Check Avalaibility</div>
+            <div className={styles.button}>
+              <Link href={`/hotels/${id}`}>Check Avalaibility</Link>
+            </div>
           </div>
         </div>
       </div>

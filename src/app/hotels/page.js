@@ -1,22 +1,28 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CheckIn from "../components/CheckIn";
 import styles from "@/app/styles/hotels.module.css";
 import { useRouter } from "next/navigation";
 
 import { SearchItem } from "../components/SearchItem";
 import BookingBox from "../components/BookingBox";
-import Link from "next/link";
+import axios from "axios";
 
 const Page = () => {
-  //const router = useRouter();
-  //const { destination, age } = router.query;
-  //const { destination, startDate, endDate, children, adult, room } =
-  //  router.query;
-  //console.log(destination, startDate);
-
-  // <Link href={`/hotels/${data}`}>{data}</Link>}
+  const [hotel, setHotel] = useState([]);
+  useEffect(() => {
+    const getHotel = async () => {
+      try {
+        const response = await axios.get("/api/hotels");
+        const hotelData = response.data.hotels;
+        setHotel(hotelData);
+      } catch (err) {
+        console.log("error fetching hotel data", err);
+      }
+    };
+    getHotel();
+  }, []);
   return (
     <div className={styles.container}>
       <div className={styles.wrapper}>
@@ -24,11 +30,16 @@ const Page = () => {
           <BookingBox type="hotelsPage" />
         </div>
         <div className={styles.right}>
-          <SearchItem />
-          <SearchItem />
-          <SearchItem />
-          <SearchItem />
-          <SearchItem />
+          {hotel.map((hotel) => (
+            <SearchItem
+              key={hotel._id}
+              id={hotel._id}
+              name={hotel.name}
+              add={hotel.address}
+              desc={hotel.desc}
+              features={hotel.features}
+            />
+          ))}
         </div>
       </div>
     </div>

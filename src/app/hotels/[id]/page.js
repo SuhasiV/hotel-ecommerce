@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/app/styles/singleHotel.module.css";
 import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -12,18 +12,24 @@ import RestaurantIcon from "@mui/icons-material/Restaurant";
 import Image from "next/image";
 import BookingBox from "@/app/components/BookingBox";
 import HotelGallery from "@/app/components/HotelGallery";
+import axios from "axios";
 
-const Page = () => {
+const Page = ({ params }) => {
+  const [hotel, setHotel] = useState(null); // Initialize the state with null
+
   useEffect(() => {
-    const handleFetch = async () => {
+    const id = params.id;
+    const getHotel = async () => {
       try {
-        // const response = await axios.get("/api/")
+        const response = await axios.get(`/api/hotels/${params.id}`);
+
+        setHotel(response.data.hotel);
       } catch (err) {
-        console.log("error while extracting individual hotel info", err);
+        console.log("error fetching user data ", err);
       }
     };
-    handleFetch();
-  }, []);
+    getHotel();
+  }, [params.id]);
 
   const roomType3 = [
     {
@@ -88,8 +94,8 @@ const Page = () => {
               <StarIcon />
               <StarIcon />
             </div>
-            <div className={styles.subTitle}>A Luxury Haven</div>
-            <div className={styles.title}>Imperial Grand Palace</div>
+            <div className={styles.subTitle}></div>
+            <div className={styles.title}>{hotel.name}</div>
             <hr
               className={styles.roomHr}
               style={{
@@ -102,13 +108,7 @@ const Page = () => {
             />
             <div className={styles.address}>
               <LocationOnIcon className={styles.locIcon} />
-              123 Regal Avenue, Metropolis City, Luxeland
-            </div>
-            <div className={styles.info}>
-              Welcome to Imperial Grand Palace, our flagship hotel where luxury
-              meets sophistication. Conveniently located in the heart of
-              Metropolis City, our opulent establishment is a symbol of elegance
-              and comfort.
+              {hotel.address}
             </div>
           </div>
           <div className={styles.section}>

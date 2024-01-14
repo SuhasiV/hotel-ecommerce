@@ -24,13 +24,23 @@ const CheckIn = () => {
     room: "1",
   });
   const [openOption, setOpenOption] = useState(false);
-  const handleOption = () => {};
+
+  const handleOption = (name, operation) => {
+    setOption((prev) => {
+      const newValue = operation === "i" ? +prev[name] + 1 : +prev[name] - 1;
+      return {
+        ...prev,
+        [name]: newValue < 0 ? 0 : newValue, // Ensure the value is not negative
+      };
+    });
+  };
 
   const queryParams = `dest=${encodeURIComponent(
     destination
   )}&startDate=${encodeURIComponent(
     date[0].startDate
   )}&endDate=${encodeURIComponent(date[0].endDate)}`;
+  const optionParams = new URLSearchParams(option).toString();
 
   return (
     <div className={styles.header}>
@@ -78,44 +88,60 @@ const CheckIn = () => {
             </span>
           </div>
         </div>
-
-        <div
-          className={styles.section}
-          onClick={() => {
-            setOpenOption(!openOption);
-          }}
-        >
+        <div className={styles.section}>
           <div className={styles.sectionLabel}>Rooms & Guests</div>
           {openOption && (
             <div className={styles.options}>
               <div className={styles.subOption}>
                 <div className={styles.optionLabel}>Adults:</div>
                 <div className={styles.optionValue}>
-                  <button>-</button>
-                  <span>1</span>
-                  <button>+</button>
+                  <button
+                    disabled={option.adult <= 1}
+                    onClick={() => handleOption("adult", "d")}
+                  >
+                    -
+                  </button>
+                  <span> {option.adult}</span>
+                  <button onClick={() => handleOption("adult", "i")}>+</button>
                 </div>
               </div>
               <div className={styles.subOption}>
                 <div className={styles.optionLabel}>Children:</div>
                 <div className={styles.optionValue}>
-                  <button>-</button>
-                  <span>1</span>
-                  <button>+</button>
+                  <button
+                    disabled={option.children <= 1}
+                    onClick={() => handleOption("children", "d")}
+                  >
+                    -
+                  </button>
+                  <span>{option.children}</span>
+                  <button onClick={() => handleOption("children", "i")}>
+                    +
+                  </button>
                 </div>
               </div>
               <div className={styles.subOption}>
                 <div className={styles.optionLabel}>Room:</div>
                 <div className={styles.optionValue}>
-                  <button>-</button>
-                  <span>1</span>
-                  <button>+</button>
+                  <button
+                    disabled={option.room <= 1}
+                    onClick={() => handleOption("room", "d")}
+                  >
+                    -
+                  </button>
+                  <span>{option.room}</span>
+                  <button onClick={() => handleOption("room", "i")}>+</button>
                 </div>
               </div>
             </div>
           )}
 
-          <div className={styles.sectionData}>
+          <div
+            className={styles.sectionData}
+            onClick={() => {
+              setOpenOption(!openOption);
+            }}
+          >
             <span className={styles.largeText}>{option.adult}</span> Adults{" "}
             <span className={styles.largeText}>{option.children}</span> Children{" "}
             <span className={styles.largeText}>{option.room}</span> Room
@@ -123,7 +149,7 @@ const CheckIn = () => {
         </div>
 
         <div className={styles.section} style={{ background: "#333" }}>
-          <Link href={`/hotels?${queryParams}`}>
+          <Link href={`/hotels?${queryParams}&${optionParams}`}>
             <div className={styles.sectionButton}>Check Now</div>
           </Link>
         </div>

@@ -17,15 +17,68 @@ const hotelSchema = new mongoose.Schema({
     type: [String],
   },
   desc: {
-    type: String,
+    type: [String],
     required: true,
   },
   photos: {
     type: [String],
   },
+
   features: {
-    type: [String],
-    required: true,
+    gym: {
+      available: {
+        type: Boolean,
+        default: false,
+      },
+      imagePath: {
+        type: String,
+      },
+    },
+    pool: {
+      available: {
+        type: Boolean,
+        default: false,
+      },
+      imagePath: {
+        type: String,
+      },
+    },
+    breakfast: {
+      available: {
+        type: Boolean,
+        default: false,
+      },
+      imagePath: {
+        type: String,
+      },
+    },
+    couplefriendly: {
+      available: {
+        type: Boolean,
+        default: false,
+      },
+      imagePath: {
+        type: String,
+      },
+    },
+    wifi: {
+      available: {
+        type: Boolean,
+        default: false,
+      },
+      imagePath: {
+        type: String,
+      },
+    },
+    bar: {
+      available: {
+        type: Boolean,
+        default: false,
+      },
+      imagePath: {
+        type: String,
+      },
+    },
   },
   rating: {
     type: Number,

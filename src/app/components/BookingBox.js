@@ -1,15 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CheckinCheckout } from "../components/CheckinCheckout";
 import styles from "@/app/styles/bookingBox.module.css";
 
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const BookingBox = ({ type, roomTypes }) => {
   const searchParams = useSearchParams();
 
   const dest = searchParams.get("dest") ?? "null";
+  const adult = searchParams.get("adult") ?? "null";
+  const children = searchParams.get("children") ?? "null";
+  const room = searchParams.get("room") ?? "null";
 
   const [destination, setDestination] = useState(dest);
+  const [option, setOption] = useState({
+    adult: adult,
+    children: children,
+    room: room,
+  });
 
   return (
     <div>
@@ -27,6 +35,18 @@ const BookingBox = ({ type, roomTypes }) => {
         <div className={styles.label}>Options</div>{" "}
         <div className={styles.options}>
           <div className={styles.optionType}>
+            <span>Adults</span>
+            <input min={1} type="number" placeholder={option.adult} />
+          </div>
+          <div className={styles.optionType}>
+            <span>Children</span>
+            <input min={0} type="number" placeholder={option.children} />
+          </div>
+          <div className={styles.optionType}>
+            <span>Rooms</span>
+            <input min={1} type="number" placeholder={option.room} />
+          </div>
+          <div className={styles.optionType}>
             <span>
               Max Price <small> (per night)</small>
             </span>
@@ -39,18 +59,6 @@ const BookingBox = ({ type, roomTypes }) => {
             </span>
 
             <input min={0} type="number" />
-          </div>
-          <div className={styles.optionType}>
-            <span>Adults</span>
-            <input min={1} type="number" />
-          </div>
-          <div className={styles.optionType}>
-            <span>Children</span>
-            <input min={0} type="number" />
-          </div>
-          <div className={styles.optionType}>
-            <span>Rooms</span>
-            <input min={1} type="number" />
           </div>
           {type === "singleHotelPage" ? (
             <div className={styles.optionType}>
