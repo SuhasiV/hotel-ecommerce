@@ -2,7 +2,7 @@ import React from "react";
 import styles from "@/app/styles/searchItem.module.css";
 import Image from "next/image";
 import StarIcon from "@mui/icons-material/Star";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import DoneAllIcon from "@mui/icons-material/DoneAll";
 import Link from "next/link";
 
 const truncText = (text, maxLength) => {
@@ -14,6 +14,7 @@ const truncText = (text, maxLength) => {
 };
 
 export const SearchItem = ({ id, name, add, desc, features }) => {
+  console.log(features);
   const truncDesc = truncText(desc[0], 15);
 
   return (
@@ -31,18 +32,24 @@ export const SearchItem = ({ id, name, add, desc, features }) => {
         <div className={styles.box1}>
           <div className={styles.title}>{name}</div>
           <div className={styles.address}>{add}</div>
-          <div className={styles.check}>
-            <CheckCircleIcon style={{ color: "green" }} />
-            <div> Breakfast Included</div>
+          <div className={styles.features}>
+            {Object.entries(features).map(
+              ([featureName, feature]) =>
+                feature.available && (
+                  <div className={styles.check} key={featureName}>
+                    <DoneAllIcon
+                      style={{ color: "green", fontSize: "large" }}
+                    />
+                    <div>
+                      {" "}
+                      {featureName.charAt(0).toUpperCase() +
+                        featureName.slice(1)}
+                    </div>
+                  </div>
+                )
+            )}
           </div>
-          <div className={styles.check}>
-            <CheckCircleIcon style={{ color: "green" }} />
-            <div> Wi-Fi, Netflix, etc</div>
-          </div>
-          <div className={styles.check}>
-            <CheckCircleIcon style={{ color: "green" }} />
-            <div> Couple Friendly</div>
-          </div>
+
           <div className={styles.about}>{truncDesc}</div>
         </div>
         <div className={styles.box2}>

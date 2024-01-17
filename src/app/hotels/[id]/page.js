@@ -1,36 +1,17 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import SingleHotelInfo from "@/app/components/SingleHotelInfo";
+import React from "react";
 import styles from "@/app/styles/singleHotel.module.css";
-import StarIcon from "@mui/icons-material/Star";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import BrunchDiningIcon from "@mui/icons-material/BrunchDining";
+import BookingBox from "@/app/components/BookingBox";
+import HotelGallery from "@/app/components/HotelGallery";
+import Image from "next/image";
 import WifiIcon from "@mui/icons-material/Wifi";
 import GroupsIcon from "@mui/icons-material/Groups";
 import ConnectedTvIcon from "@mui/icons-material/ConnectedTv";
 import RestaurantIcon from "@mui/icons-material/Restaurant";
-import Image from "next/image";
-import BookingBox from "@/app/components/BookingBox";
-import HotelGallery from "@/app/components/HotelGallery";
-import axios from "axios";
 
-const Page = ({ params }) => {
-  const [hotel, setHotel] = useState(null); // Initialize the state with null
-
-  useEffect(() => {
-    const id = params.id;
-    const getHotel = async () => {
-      try {
-        const response = await axios.get(`/api/hotels/${params.id}`);
-
-        setHotel(response.data.hotel);
-      } catch (err) {
-        console.log("error fetching user data ", err);
-      }
-    };
-    getHotel();
-  }, [params.id]);
-
+const page = ({ params }) => {
   const roomType3 = [
     {
       id: 1,
@@ -81,219 +62,122 @@ const Page = ({ params }) => {
     },
   ];
 
+  const hotelId = params.id;
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper1}>
-        <div className={styles.left}>
-          <HotelGallery />
-          <div className={styles.info}>
-            <div className={styles.star}>
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-              <StarIcon />
-            </div>
-            <div className={styles.subTitle}></div>
-            <div className={styles.title}>{hotel.name}</div>
-            <hr
-              className={styles.roomHr}
-              style={{
-                height: "4px",
-                color: "#333",
-                background: "#333",
-                width: "70px",
-                marginBottom: "30px",
-              }}
+    <div>
+      <div className={styles.container}>
+        <div className={styles.wrapper1}>
+          <div className={styles.left}>
+            <HotelGallery />
+            <SingleHotelInfo hotelId={hotelId} />
+          </div>
+
+          <div className={styles.right}>
+            <BookingBox
+              type="singleHotelPage"
+              roomTypes={{ roomType2, roomType3 }}
             />
-            <div className={styles.address}>
-              <LocationOnIcon className={styles.locIcon} />
-              {hotel.address}
-            </div>
-          </div>
-          <div className={styles.section}>
-            <div className={styles.heading}>Discover the Best of Luxury</div>
-            <div className={styles.pointers}>
-              <div className={styles.pointer}>
-                <BrunchDiningIcon className={styles.icon} />
-                <div className={styles.pointerTitle}>Exquisite Dining</div>
-                <hr />
-                <div className={styles.pointerInfo}>
-                  {" "}
-                  Diverse range of international and local cuisines
-                </div>
-              </div>
-              <div className={styles.pointer}>
-                {" "}
-                <BrunchDiningIcon className={styles.icon} />
-                <div className={styles.pointerTitle}>Luxurious Spa</div>
-                <hr />
-                <div className={styles.pointerInfo}>
-                  Spa with a range of therapeutic treatments
-                </div>
-              </div>
-              <div className={styles.pointer}>
-                {" "}
-                <BrunchDiningIcon className={styles.icon} />
-                <div className={styles.pointerTitle}>Fitness Center</div>
-                <hr />
-                <div className={styles.pointerInfo}>
-                  Stay fit with state-of-the-art fitness equipment
-                </div>
-              </div>
-              <div className={styles.pointer}>
-                {" "}
-                <BrunchDiningIcon className={styles.icon} />
-                <div className={styles.pointerTitle}> Services</div>
-                <hr />
-                <div className={styles.pointerInfo}>
-                  Prepared to help with transportation and local suggestions.
-                </div>
-              </div>
-            </div>
-          </div>{" "}
-          <div className={styles.section}>
-            <div className={styles.heading}>Most Popular Facilities:</div>
-            <div className={styles.facilitiesBox}>
-              <div className={styles.facilitiesSection}>
-                {" "}
-                <BrunchDiningIcon className={styles.facilitiesIcon} />
-                <div className={styles.facilitiesTitle}> Wi-Fi</div>
-              </div>
-              <div className={styles.facilitiesSection}>
-                {" "}
-                <BrunchDiningIcon className={styles.facilitiesIcon} />
-                <div className={styles.facilitiesTitle}> Valet Parking</div>
-              </div>
-              <div className={styles.facilitiesSection}>
-                {" "}
-                <BrunchDiningIcon className={styles.facilitiesIcon} />
-                <div className={styles.facilitiesTitle}> 24/7 Room Service</div>
-              </div>
-              <div className={styles.facilitiesSection}>
-                {" "}
-                <BrunchDiningIcon className={styles.facilitiesIcon} />
-                <div className={styles.facilitiesTitle}> Bar</div>
-              </div>
-              <div className={styles.facilitiesSection}>
-                {" "}
-                <BrunchDiningIcon className={styles.facilitiesIcon} />
-                <div className={styles.facilitiesTitle}> Restraunt</div>
-              </div>
-              <div className={styles.facilitiesSection}>
-                {" "}
-                <BrunchDiningIcon className={styles.facilitiesIcon} />
-                <div className={styles.facilitiesTitle}> Swimming Pool</div>
-              </div>
-            </div>{" "}
           </div>
         </div>
+        <div className={styles.wrapper2}>
+          <div className={styles.section}>
+            <div className={styles.heading}>Room Types:</div>
+            <div className={styles.roomSec1}>
+              {roomType3.map((item) => (
+                <div className={styles.box1} key={item.id}>
+                  <div className={styles.image}>
+                    <Image
+                      src={item.img}
+                      fill={true}
+                      alt={item.alt}
+                      className={styles.roomImage}
+                    />
+                  </div>
+                  <div className={styles.roomBookNow}>Book Now</div>
+                  <div className={styles.boxInfo}>
+                    <div className={styles.boxHidden}>
+                      <div className={styles.boxPrice}>
+                        {item.price} <small>/ Night ({item.bed})</small>{" "}
+                      </div>
+                      <div className={styles.boxName}>{item.name}</div>
+                      <div></div>
+                      <div>
+                        {" "}
+                        <hr className={styles.roomHr} />
+                      </div>
 
-        <div className={styles.right}>
-          <BookingBox
-            type="singleHotelPage"
-            roomTypes={{ roomType2, roomType3 }}
-          />
-        </div>
-      </div>
-      <div className={styles.wrapper2}>
-        <div className={styles.section}>
-          <div className={styles.heading}>Room Types:</div>
-          <div className={styles.roomSec1}>
-            {roomType3.map((item) => (
-              <div className={styles.box1} key={item.id}>
-                <div className={styles.image}>
-                  <Image
-                    src={item.img}
-                    fill={true}
-                    alt={item.alt}
-                    className={styles.roomImage}
-                  />
-                </div>
-                <div className={styles.roomBookNow}>Book Now</div>
-                <div className={styles.boxInfo}>
-                  <div className={styles.boxHidden}>
-                    <div className={styles.boxPrice}>
-                      {item.price} <small>/ Night ({item.bed})</small>{" "}
-                    </div>
-                    <div className={styles.boxName}>{item.name}</div>
-                    <div></div>
-                    <div>
-                      {" "}
-                      <hr className={styles.roomHr} />
-                    </div>
-
-                    <div className={styles.roomList}>
-                      {" "}
-                      <div>
-                        <WifiIcon />
-                        Free Wifi
-                      </div>
-                      <div>
-                        <GroupsIcon />
-                        {item.people}
-                      </div>
-                      <div>
-                        <ConnectedTvIcon />
-                        Free Netflix
-                      </div>
-                      <div>
-                        <RestaurantIcon />
-                        Breakfast
+                      <div className={styles.roomList}>
+                        {" "}
+                        <div>
+                          <WifiIcon />
+                          Free Wifi
+                        </div>
+                        <div>
+                          <GroupsIcon />
+                          {item.people}
+                        </div>
+                        <div>
+                          <ConnectedTvIcon />
+                          Free Netflix
+                        </div>
+                        <div>
+                          <RestaurantIcon />
+                          Breakfast
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-          <div className={styles.roomSec1}>
-            {roomType2.map((item) => (
-              <div className={styles.box1} key={item.id}>
-                <div className={styles.image}>
-                  <Image
-                    src={item.img}
-                    fill={true}
-                    alt={item.alt}
-                    className={styles.roomImage}
-                  />
-                </div>
-                <div className={styles.roomBookNow}>Book Now</div>
-                <div className={styles.boxInfo}>
-                  <div className={styles.boxHidden}>
-                    <div className={styles.boxPrice}>
-                      {item.price} <small>/ Night ({item.bed})</small>{" "}
-                    </div>
-                    <div className={styles.boxName}>{item.name}</div>
-                    <div></div>
-                    <div>
-                      {" "}
-                      <hr className={styles.roomHr} />
-                    </div>
+              ))}
+            </div>
+            <div className={styles.roomSec1}>
+              {roomType2.map((item) => (
+                <div className={styles.box1} key={item.id}>
+                  <div className={styles.image}>
+                    <Image
+                      src={item.img}
+                      fill={true}
+                      alt={item.alt}
+                      className={styles.roomImage}
+                    />
+                  </div>
+                  <div className={styles.roomBookNow}>Book Now</div>
+                  <div className={styles.boxInfo}>
+                    <div className={styles.boxHidden}>
+                      <div className={styles.boxPrice}>
+                        {item.price} <small>/ Night ({item.bed})</small>{" "}
+                      </div>
+                      <div className={styles.boxName}>{item.name}</div>
+                      <div></div>
+                      <div>
+                        {" "}
+                        <hr className={styles.roomHr} />
+                      </div>
 
-                    <div className={styles.roomList}>
-                      {" "}
-                      <div>
-                        <WifiIcon />
-                        Free Wifi
-                      </div>
-                      <div>
-                        <GroupsIcon />
-                        {item.people}
-                      </div>
-                      <div>
-                        <ConnectedTvIcon />
-                        Free Netflix
-                      </div>
-                      <div>
-                        <RestaurantIcon />
-                        Breakfast
+                      <div className={styles.roomList}>
+                        {" "}
+                        <div>
+                          <WifiIcon />
+                          Free Wifi
+                        </div>
+                        <div>
+                          <GroupsIcon />
+                          {item.people}
+                        </div>
+                        <div>
+                          <ConnectedTvIcon />
+                          Free Netflix
+                        </div>
+                        <div>
+                          <RestaurantIcon />
+                          Breakfast
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -301,4 +185,4 @@ const Page = ({ params }) => {
   );
 };
 
-export default Page;
+export default page;
