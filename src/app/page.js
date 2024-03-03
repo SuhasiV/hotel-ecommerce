@@ -3,8 +3,11 @@ import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 import Slider from "./components/Slider";
-import CheckIn from "./components/CheckIn";
+import CheckIn from "./components/checkIn/CheckIn";
 import Layout1 from "./components/Layout1";
+import NewHotels from "./components/newHotels/NewHotels";
+import DestinationCard from "./components/destinationSlider/DestinationSlider";
+import Banner from "./components/banner/Banner";
 
 export default function Home() {
   const subheading = "ABout Us";
@@ -24,13 +27,20 @@ export default function Home() {
       <Slider />
       <div className={styles.wrapper}>
         <CheckIn />
-        <Layout1
+        {/* <Layout1
           subheading={subheading}
           heading={heading}
           paragraph1={paragraph1}
           paragraph2={paragraph2}
           imgData={imgData}
-        />
+        /> */}
+        <NewHotels />
+
+        <DestinationCard type="cold_destination" />
+      </div>
+      <Banner />
+      <div className={styles.wrapper}>
+        <DestinationCard type="popular_destination" />
       </div>
     </main>
   );

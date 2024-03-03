@@ -17,6 +17,14 @@ export const SearchItem = ({ id, name, add, desc, features }) => {
   console.log(features);
   const truncDesc = truncText(desc[0], 15);
 
+  const couplefriendly = features?.couplefriendly?.available
+    ? features.couplefriendly.imagePath
+    : "null";
+
+  const breakfast = features?.breakfast?.available
+    ? features.breakfast.imagePath
+    : "null";
+
   return (
     <div className={styles.container}>
       <div className={styles.left}>
@@ -33,20 +41,29 @@ export const SearchItem = ({ id, name, add, desc, features }) => {
           <div className={styles.title}>{name}</div>
           <div className={styles.address}>{add}</div>
           <div className={styles.features}>
-            {Object.entries(features).map(
-              ([featureName, feature]) =>
-                feature.available && (
-                  <div className={styles.check} key={featureName}>
-                    <DoneAllIcon
-                      style={{ color: "green", fontSize: "large" }}
-                    />
-                    <div>
-                      {" "}
-                      {featureName.charAt(0).toUpperCase() +
-                        featureName.slice(1)}
-                    </div>
-                  </div>
-                )
+            {couplefriendly && (
+              <div className={styles.feature}>
+                {" "}
+                <Image
+                  src={`/img/${couplefriendly}`}
+                  alt="couplefriendly Image"
+                  height={20}
+                  width={20}
+                />
+                Couple Friendly
+              </div>
+            )}
+            {breakfast && (
+              <div className={styles.feature}>
+                {" "}
+                <Image
+                  src={`/img/${breakfast}`}
+                  alt="breakfast Image"
+                  height={20}
+                  width={20}
+                />
+                Breakfast included
+              </div>
             )}
           </div>
 

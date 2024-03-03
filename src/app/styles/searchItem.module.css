@@ -21,7 +21,16 @@
   flex: 3;
   padding-right: 30px;
 }
-
+.features {
+  display: flex;
+  flex-direction: column;
+}
+.feature {
+  padding: 5px 0px 5px 0px;
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}
 .title {
   font-size: 28px;
   padding-bottom: 6px;

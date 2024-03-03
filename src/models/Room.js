@@ -8,7 +8,24 @@ const roomSchema = new mongoose.Schema(
     },
     desc: {
       type: String,
-      required: true,
+      require: true,
+    },
+    features: {
+      balcony: {
+        available: {
+          type: Boolean,
+          default: false,
+        },
+      },
+      bathtub: {
+        available: {
+          type: Boolean,
+          default: false,
+        },
+      },
+    },
+    amenities: {
+      type: [String],
     },
     photo: {
       type: String,
@@ -23,6 +40,10 @@ const roomSchema = new mongoose.Schema(
         unavailableDates: { type: [Date] },
       },
     ],
+    price: {
+      number: Number,
+      default: true,
+    },
   },
   {
     timestamps: true,

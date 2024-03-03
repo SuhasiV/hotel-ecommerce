@@ -23,22 +23,48 @@ const SingleHotelInfo = ({ hotelId }) => {
     getHotel();
   }, [hotelId]);
 
-  const gymImagePath = hotel?.features?.gym?.available
+  const gym = hotel?.features?.gym?.available
     ? hotel.features.gym.imagePath
     : null;
+  const pool = hotel?.features?.pool?.available
+    ? hotel.features.pool.imagePath
+    : null;
+  const breakfast = hotel?.features?.breakfast?.available
+    ? hotel.features.breakfast.imagePath
+    : null;
+  const couplefriendly = hotel?.features?.couplefriendly?.available
+    ? hotel.features.couplefriendly.imagePath
+    : null;
+  const wifi = hotel?.features?.wifi?.available
+    ? hotel.features.wifi.imagePath
+    : null;
+  const bar = hotel?.features?.bar?.available
+    ? hotel.features.bar.imagePath
+    : null;
+
+  const hotelName = hotel?.name ? hotel.name : "no name";
+
+  const hotelAddress = hotel?.address ? hotel.address : "no address";
+
+  const desc = hotel?.desc ? hotel.desc : "no desc";
+
+  const ratingNo = hotel?.rating ? hotel.rating : "no rating";
+  const rating = Array.from({ length: ratingNo });
 
   return (
     <div>
       <div className={styles.info}>
-        <div className={styles.star}>
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
-          <StarIcon />
+        <div className={styles.rating}>
+          {rating.map((index) => (
+            <div key={index} className={styles.star}>
+              {" "}
+              <StarIcon />
+            </div>
+          ))}
         </div>
+
         <div className={styles.subTitle}></div>
-        <div className={styles.title}></div>
+        <div className={styles.title}>{hotelName}</div>
         <hr
           className={styles.roomHr}
           style={{
@@ -51,92 +77,82 @@ const SingleHotelInfo = ({ hotelId }) => {
         />
         <div className={styles.address}>
           <LocationOnIcon className={styles.locIcon} />
+          {hotelAddress}
         </div>
+        <div className={styles.desc}>{desc}</div>
       </div>
-      <div className={styles.section}>
-        <div className={styles.heading}>Discover the Best of Luxury</div>
-        <div className={styles.pointers}>
-          <div className={styles.pointer}>
-            <BrunchDiningIcon className={styles.icon} />
-            <div className={styles.pointerTitle}>Exquisite Dining</div>
-            <hr />
-            <div className={styles.pointerInfo}>
-              {" "}
-              Diverse range of international and local cuisines
-            </div>
-          </div>
-          <div className={styles.pointer}>
-            {" "}
-            <BrunchDiningIcon className={styles.icon} />
-            <div className={styles.pointerTitle}>Luxurious Spa</div>
-            <hr />
-            <div className={styles.pointerInfo}>
-              Spa with a range of therapeutic treatments
-            </div>
-          </div>
-          <div className={styles.pointer}>
-            {" "}
-            <BrunchDiningIcon className={styles.icon} />
-            <div className={styles.pointerTitle}>Fitness Center</div>
-            <hr />
-            <div className={styles.pointerInfo}>
-              Stay fit with state-of-the-art fitness equipment
-            </div>
-          </div>
-          <div className={styles.pointer}>
-            {" "}
-            <BrunchDiningIcon className={styles.icon} />
-            <div className={styles.pointerTitle}> Services</div>
-            <hr />
-            <div className={styles.pointerInfo}>
-              Prepared to help with transportation and local suggestions.
-            </div>
-          </div>
-        </div>
-      </div>{" "}
+      <div className={styles.section}></div>{" "}
       <div className={styles.section}>
         <div className={styles.heading}>Most Popular Facilities:</div>
         <div className={styles.facilitiesBox}>
-          <div className={styles.facilitiesSection}>
-            {" "}
-            <BrunchDiningIcon className={styles.facilitiesIcon} />
-            <div className={styles.facilitiesTitle}> Wi-Fi</div>
-          </div>
-          <div className={styles.facilitiesSection}>
-            {" "}
-            <BrunchDiningIcon className={styles.facilitiesIcon} />
-            <div className={styles.facilitiesTitle}> Valet Parking</div>
-          </div>
-          <div className={styles.facilitiesSection}>
-            {" "}
-            <BrunchDiningIcon className={styles.facilitiesIcon} />
-            <div className={styles.facilitiesTitle}> 24/7 Room Service</div>
-          </div>
-          <div className={styles.facilitiesSection}>
-            {" "}
-            <BrunchDiningIcon className={styles.facilitiesIcon} />
-            <div className={styles.facilitiesTitle}> Bar</div>
-          </div>
-          <div className={styles.facilitiesSection}>
-            {" "}
-            <BrunchDiningIcon className={styles.facilitiesIcon} />
-            <div className={styles.facilitiesTitle}> Restraunt</div>
-          </div>
-          <div className={styles.facilitiesSection}>
-            {" "}
-            <BrunchDiningIcon className={styles.facilitiesIcon} />
-            <div className={styles.facilitiesTitle}> Swimming Pool</div>
-          </div>
-        </div>{" "}
+          {gym && (
+            <div className={styles.facilitiesSection}>
+              <Image
+                src={`/img/${gym}`}
+                alt="Gym Image"
+                height={40}
+                width={40}
+              />
+              <div className={styles.facilitiesTitle}> Gym</div>
+            </div>
+          )}
+          {pool && (
+            <div className={styles.facilitiesSection}>
+              <Image
+                src={`/img/${pool}`}
+                alt="pool Image"
+                height={40}
+                width={40}
+              />
+              <div className={styles.facilitiesTitle}> Pool</div>
+            </div>
+          )}
+          {bar && (
+            <div className={styles.facilitiesSection}>
+              <Image
+                src={`/img/${bar}`}
+                alt="bar Image"
+                height={40}
+                width={40}
+              />
+              <div className={styles.facilitiesTitle}> Bar</div>
+            </div>
+          )}
+          {couplefriendly && (
+            <div className={styles.facilitiesSection}>
+              <Image
+                src={`/img/${couplefriendly}`}
+                alt="couplefriendly Image"
+                height={40}
+                width={40}
+              />
+              <div className={styles.facilitiesTitle}> Couple Friendly</div>
+            </div>
+          )}
+          {wifi && (
+            <div className={styles.facilitiesSection}>
+              <Image
+                src={`/img/${wifi}`}
+                alt="wifi Image"
+                height={40}
+                width={40}
+              />
+              <div className={styles.facilitiesTitle}> Wi-Fi</div>
+            </div>
+          )}
+          {breakfast && (
+            <div className={styles.facilitiesSection}>
+              <Image
+                src={`/img/${breakfast}`}
+                alt="breakfast Image"
+                height={40}
+                width={40}
+              />
+              <div className={styles.facilitiesTitle}> Breakfast </div>
+            </div>
+          )}
+        </div>
       </div>
-      {gymImagePath && (
-        <Image
-          src={`/img/${gymImagePath}`}
-          alt="Gym Image"
-          height={50}
-          width={50}
-        />
-      )}
     </div>
   );
 };

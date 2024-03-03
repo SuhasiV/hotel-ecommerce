@@ -1,0 +1,38 @@
+.container {
+  width: 100%;
+  height: 60vh;
+  background-image: url("/hotel2.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507);
+  background-repeat: no-repeat;
+  background-size: cover;
+  object-fit: cover;
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover .icon {
+    transition: all 0.3s;
+    font-size: 40px;
+  }
+  &:hover .title {
+    font-weight: 500;
+  }
+
+  .info {
+    transition: all 0.3s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #fff;
+    font-size: 25px;
+    font-weight: 400;
+    padding: 30px;
+    background: linear-gradient(to bottom, #00000014, #000000c7);
+  }
+}

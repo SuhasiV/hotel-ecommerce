@@ -1,0 +1,37 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  background-image: url("/Untitled design.png");
+  //background-color: #f2e9e4;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  margin: 100px 0px;
+  overflow: hidden;
+
+  .overlay {
+    width: 100%;
+    color: #22223b;
+    // background-color: rgba(0, 0, 0, 0.647);
+    padding: 20px; /* Add padding for better readability */
+    text-align: center; /* Center text horizontally */
+  }
+
+  .wrapper {
+    padding: 20px 0px;
+    width: 100%;
+    max-width: 800px; /* Limit the width of the wrapper */
+    margin: 0px auto; /* Center the wrapper horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  p {
+    margin: 20px 0px;
+    line-height: 28px;
+  }
+}

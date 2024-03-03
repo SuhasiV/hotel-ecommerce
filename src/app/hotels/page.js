@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import CheckIn from "../components/CheckIn";
+import CheckIn from "../components/checkIn/CheckIn";
 import styles from "@/app/styles/hotels.module.css";
 import { useRouter } from "next/navigation";
 

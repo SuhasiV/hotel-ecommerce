@@ -2,3 +2,65 @@ body {
   margin: 0;
   padding: 0;
 }
+.heading {
+  display: flex;
+  align-items: center;
+}
+
+.line {
+  width: 25px; /* Width of the line */
+  height: 4px; /* Height of the line */
+  background-color: #4a4e69; /* Color of the line */
+  margin-right: 10px;
+  align-items: center;
+}
+.title {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.title1 {
+  font-size: 33px;
+  color: #22223b;
+  position: relative; /* Establish positioning context */
+  display: inline-block;
+  margin-bottom: 10px;
+  align-items: center;
+}
+.title2 {
+  font-size: 20px;
+  color: #9a8c98;
+  position: relative; /* Establish positioning context */
+  display: inline-block;
+  padding-bottom: 15px;
+  align-items: center;
+  font-style: italic;
+}
+.title::before {
+  content: ""; /* Required for the pseudo-element */
+  position: absolute; /* Position the line relative to the title */
+  top: 0; /* Align the line to the bottom of the title */
+  right: 0; /* Align the line to the left of the title */
+  width: 40px; /* Set the width of the line */
+  height: 3px; /* Set the height of the line */
+  background-color: rgb(45, 25, 0); /* Set the color of the line */
+}
+
+.buttonBookNow {
+  background-color: #c9ada7;
+  border: none;
+  width: 150px;
+  border-radius: 5px;
+  height: 50px;
+  font-size: 16px;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.buttonBookNow:hover {
+  background-color: #9a8c98;
+}
