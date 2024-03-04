@@ -1,8 +1,8 @@
 import Head from "next/head";
 
 import "./globals.css";
-import { Nav } from "./components/Nav";
-import { Footer } from "./components/Footer";
+import { Nav } from "./components/nav/Nav";
+import { Footer } from "./components/footer/Footer";
 import { Raleway } from "next/font/google";
 
 const raleway = Raleway({
