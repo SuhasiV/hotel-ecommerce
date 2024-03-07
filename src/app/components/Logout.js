@@ -9,7 +9,7 @@ const Logout = () => {
   const handleClick = async () => {
     try {
       await axios.get("/api/logout");
-      router.push("/login");
+      router.push("/profile/login");
     } catch (err) {
       console.log(err.message);
     }

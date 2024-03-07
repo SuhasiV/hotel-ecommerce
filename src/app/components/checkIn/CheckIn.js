@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "@/app/components/checkIn/checkIn.module.scss";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -10,21 +10,36 @@ import Link from "next/link";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BedroomParentIcon from "@mui/icons-material/BedroomParent";
+import { useSearchParams } from "next/navigation";
 
 const CheckIn = () => {
-  // const [destination, setDestination] = useState();
+  const searchParams = useSearchParams();
+
+  const dest = searchParams.get("dest") ?? null;
+  const startD = searchParams.get("startDate");
+  const endD = searchParams.get("endDate");
+  const room = searchParams.get("room") ?? "1";
+
+  const startDate = startD ? new Date(startD) : new Date();
+  const endDate = endD ? new Date(endD) : null;
+
+  const [destination, setDestination] = useState(dest);
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
-      startDate: new Date(),
-      endDate: null,
+      startDate: startDate,
+      endDate: endDate,
       key: "selection",
     },
   ]);
   const [option, setOption] = useState({
-    room: "1",
+    room: room,
   });
   const [openOption, setOpenOption] = useState(false);
+
+  // useEffect(() => {
+  //   dest ? setDestination(dest) : setDestination(null);
+  // }, []);
 
   const handleOption = (name, operation) => {
     setOption((prev) => {
@@ -35,6 +50,11 @@ const CheckIn = () => {
       };
     });
   };
+
+  const stringStartDate = date[0]?.startDate?.toISOString();
+  const stringEndDate = date[0]?.endDate?.toISOString();
+
+  const query = `dest=${destination}&startDate=${stringStartDate}&endDate=${stringEndDate}&room=${option.room}`;
 
   // const queryParams = `dest=${encodeURIComponent(
   //   destination
@@ -50,7 +70,7 @@ const CheckIn = () => {
           <LocationOnIcon className={styles.icons} />
           <input
             type="text"
-            placeholder="Select destination"
+            placeholder={destination ? destination : "Enter Destination"}
             onChange={(e) => setDestination(e.target.value)}
           />
           <div className={styles.sectionData}>
@@ -120,8 +140,7 @@ const CheckIn = () => {
         <div className={styles.section}>
           <div className={styles.sectionButton}>
             <Link
-              href="/"
-              // href={`/hotels?${queryParams}&${optionParams}`}
+              href={`/hotels?${query}`} // href={`/hotels?${queryParams}&${optionParams}`}
               className={styles.button}
             >
               Check Now

@@ -23,59 +23,56 @@ const hotelSchema = new mongoose.Schema({
   photos: {
     type: [String],
   },
-
-  features: {
-    gym: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
+  couplefriendly: {
+    type: Boolean,
+    default: true,
+  },
+  pool: {
+    type: Boolean,
+    default: true,
+  },
+  inRoomAmenities: {
+    wifi: {
+      type: Boolean,
+      default: true,
     },
-    pool: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
+    espressoMachine: {
+      type: Boolean,
+      default: true,
+    },
+    miniBar: {
+      type: Boolean,
+      default: true,
     },
     breakfast: {
+      type: Boolean,
+      default: true,
+    },
+    bathTub: {
+      type: Boolean,
+      default: true,
+    },
+    safe: {
+      type: Boolean,
+      default: true,
+    },
+  },
+  facilities: {
+    spa: {
       available: {
         type: Boolean,
-        default: false,
+        default: true,
       },
-      imagePath: {
+      spaId: {
         type: String,
       },
     },
-    couplefriendly: {
+    dining: {
       available: {
         type: Boolean,
-        default: false,
+        default: true,
       },
-      imagePath: {
-        type: String,
-      },
-    },
-    wifi: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
-    },
-    bar: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
+      restId: {
         type: String,
       },
     },
@@ -88,19 +85,8 @@ const hotelSchema = new mongoose.Schema({
   rooms: {
     type: [String],
   },
-  restId: [
-    {
-      type: String,
-    },
-  ],
-  spaId: [
-    {
-      type: String,
-    },
-  ],
   cheapestPrice: {
     type: Number,
-    required: true,
   },
   isfeatured: {
     type: Boolean,

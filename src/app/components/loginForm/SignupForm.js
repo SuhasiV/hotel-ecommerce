@@ -1,12 +1,15 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
+import React from "react";
 import { useRouter } from "next/navigation";
-import { NextResponse } from "next/server";
+import styles from "./loginForm.module.scss";
+import Link from "next/link";
 
-const LoginForm = () => {
+const SignupForm = () => {
   const router = useRouter();
 
   const [user, setUser] = useState({
+    username: "",
     email: "",
     password: "",
   });
@@ -16,32 +19,30 @@ const LoginForm = () => {
     const name = e.target.name;
     const value = e.target.value;
 
-    setUser((prevUser) => ({
-      ...prevUser,
-      [name]: value,
-    }));
+    setUser((prevUser) => ({ ...prevUser, [name]: value }));
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("/api/signup", {
         method: "POST",
         headers: { Content_Type: "application/json" },
         body: JSON.stringify({
+          username: user.username,
           email: user.email,
           password: user.password,
         }),
       });
-
+      // Set the status based on the response from the API route
       if (response.status === 200) {
         setUser({
           username: "",
           email: "",
           password: "",
         });
-        console.log("login successful", response.data);
-        router.push("/");
+        router.push("/profile/login");
       } else {
         setStatus("error");
       }
@@ -51,39 +52,63 @@ const LoginForm = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <form onSubmit={handleSubmit}>
-        <div>
-          <label>Email</label>
+        <br />
+        <div className={styles.section}>
+          <label>Full Name</label>
           <input
             type="text"
-            id="email"
-            name="email"
-            value={user.email}
-            placeholder="Enter your email"
+            name="username"
+            id="username"
+            placeholder="Enter your name"
+            value={user.username}
             onChange={handleChange}
             required
           />
         </div>
-        <div>
+        <div className={styles.section}>
+          <label>Email</label>
+          <input
+            type="text"
+            name="email"
+            id="email"
+            placeholder="Enter your email"
+            value={user.email}
+            onChange={handleChange}
+            required
+            autoComplete="off"
+          />
+        </div>
+        <div className={styles.section}>
           <label>Password</label>
           <input
             type="password"
-            id="password"
             name="password"
-            value={user.password}
+            id="password"
             placeholder="Enter your password"
+            value={user.password}
             onChange={handleChange}
             required
+            autoComplete="off"
           />
         </div>
         <div>
           {status === "error" && <p>There was an error. Please try again.</p>}
-          <button type="submit">Login</button>
+          <button type="submit">Signup</button>
+          <br /> <br />
+          <div style={{ textAlign: "center" }}>
+            {" "}
+            Already have account? Login instead.
+          </div>
+          <Link href="/profile/login">
+            {" "}
+            <button>Login</button>
+          </Link>
         </div>
       </form>
     </div>
   );
 };
 
-export default LoginForm;
+export default SignupForm;
