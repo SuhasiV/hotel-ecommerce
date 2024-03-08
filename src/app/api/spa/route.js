@@ -1,26 +1,24 @@
 import dbConn from "@/utils/dbConn";
-import Restraunt from "@/models/Restraunt";
+import Spa from "@/models/Spa";
 import { NextRequest, NextResponse } from "next/server";
 import { checkAdmin } from "@/app/helpers/checkAdmin";
 
-//API NOT TESTED FOR RESTRAUNT....
-
-//GET ALL Restraunt
+//GET ALL SPA
 export async function GET() {
   try {
     await dbConn();
 
-    const restraunt = await Restraunt.find();
+    const spa = await Spa.find();
     return NextResponse.json({
-      message: "All Restraunts extracted sucessfully",
-      restraunt,
+      message: "All Spas extracted sucessfully",
+      spa,
     });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
 
-//UPDATE SINGLE Restraunt
+//UPDATE SINGLE SPA
 export async function PUT(req) {
   try {
     const id = await req.nextUrl.searchParams.get("id");
@@ -33,11 +31,11 @@ export async function PUT(req) {
       return adminCheckResult;
     }
 
-    await Restraunt.findByIdAndUpdate(id, body, {
+    await Spa.findByIdAndUpdate(id, body, {
       new: true,
     });
     return NextResponse.json({
-      message: "Restraunt updated sucessfully",
+      message: "Spa updated sucessfully",
     });
   } catch (error) {
     return NextResponse.json({ error: error.message }, { status: 500 });

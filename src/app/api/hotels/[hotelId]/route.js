@@ -11,11 +11,6 @@ export async function GET(req, { params }) {
     const { hotelId } = params;
     await dbConn();
 
-    const adminCheckResult = checkAdmin(req);
-    if (adminCheckResult) {
-      return adminCheckResult;
-    }
-
     const hotel = await Hotel.findOne({ _id: hotelId });
 
     return NextResponse.json({

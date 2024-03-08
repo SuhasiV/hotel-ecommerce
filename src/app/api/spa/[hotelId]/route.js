@@ -1,10 +1,10 @@
 import dbConn from "@/utils/dbConn";
 import Hotel from "@/models/Hotels";
-import Restraunt from "@/models/Restraunt";
+import Spa from "@/models/Spa";
 import { NextRequest, NextResponse } from "next/server";
 import { checkAdmin } from "@/app/helpers/checkAdmin";
 
-//CREATE Restraunt AND UPDATE IN HOTEL
+//CREATE SPA AND UPDATE IN HOTEL
 
 export async function POST(req, { params }) {
   const { hotelId } = params;
@@ -14,20 +14,20 @@ export async function POST(req, { params }) {
     body.hotelId = hotelId;
     await dbConn();
 
-    const newRestraunt = await Restraunt.create(body);
+    const newSpa = await Spa.create(body);
 
     const updatedHotel = await Hotel.findByIdAndUpdate(
       hotelId,
       {
-        $push: { "facilities.dining.restId": newRestraunt._id },
+        $push: { "facilities.spa.spaId": newSpa._id },
       },
       { new: true }
     );
 
     return NextResponse.json({
-      message: "Restraunt created and hotel updated successfully",
+      message: "Spa created and hotel updated successfully",
       success: true,
-      newRestraunt,
+      newSpa,
       updatedHotel,
     });
   } catch (error) {
@@ -38,7 +38,7 @@ export async function POST(req, { params }) {
 //DELETE ROOM AND UPDATE HOTEL
 export async function DELETE(req, { params }) {
   const { hotelId } = params;
-  const restrauntId = await req.nextUrl.searchParams.get("id");
+  const spaId = await req.nextUrl.searchParams.get("id");
   try {
     await dbConn();
 
@@ -48,14 +48,14 @@ export async function DELETE(req, { params }) {
       return adminCheckResult;
     }
 
-    await Restraunt.findByIdAndDelete(restrauntId);
+    await Spa.findByIdAndDelete(spaId);
 
     await Hotel.findByIdAndUpdate(hotelId, {
-      $pull: { "facilities.dining.restId": restrauntId },
+      $pull: { "facilities.spa.spaId": spaId },
     });
 
     return NextResponse.json({
-      message: "Restraunt deleted and Hotel updated successfully",
+      message: "Spa deleted and Hotel updated successfully",
       status: 200,
     });
   } catch (err) {

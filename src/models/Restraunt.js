@@ -6,6 +6,10 @@ const restrauntSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    hotelId: {
+      type: String,
+      required: true,
+    },
     desc: {
       type: String,
       required: true,
