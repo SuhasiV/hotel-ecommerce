@@ -1,5 +1,6 @@
 import dbConn from "@/utils/dbConn";
 import Hotel from "@/models/Hotels";
+import Room from "@/models/Room";
 import { NextRequest, NextResponse } from "next/server";
 //import { getDataFromToken } from "@/app/helpers/getDataFromToken";
 import { checkAdmin } from "@/app/helpers/checkAdmin";
@@ -85,5 +86,36 @@ export async function PUT(req, { params }) {
     return NextResponse.json({ message: "Updated successfully", newHotel });
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });
+  }
+}
+
+//CREATE ROOM AND UPDATE IN HOTEL
+
+export async function POST(req, { params }) {
+  const { hotelId } = params;
+
+  try {
+    const body = await req.json();
+    body.hotelId = hotelId;
+    await dbConn();
+
+    const newRoom = await Room.create(body);
+
+    const updatedHotel = await Hotel.findByIdAndUpdate(
+      hotelId,
+      {
+        $push: { rooms: newRoom._id },
+      },
+      { new: true }
+    );
+
+    return NextResponse.json({
+      message: "Room created and hotel updated successfully",
+      success: true,
+      newRoom,
+      updatedHotel,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }

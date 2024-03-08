@@ -6,8 +6,7 @@ export const checkAdmin = (req) => {
   if (!isAdmin) {
     return NextResponse.json(
       {
-        message:
-          "Unauthorized: You are not authorized to can create new hotels",
+        message: "Unauthorized: You are not authorized.",
         success: false,
       },
       { status: 401 }

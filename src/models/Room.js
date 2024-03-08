@@ -6,22 +6,22 @@ const roomSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    hotelId: {
+      type: String,
+      required: true,
+    },
     desc: {
       type: String,
-      require: true,
+      required: true,
     },
     features: {
       balcony: {
-        available: {
-          type: Boolean,
-          default: false,
-        },
+        type: Boolean,
+        default: false,
       },
       bathtub: {
-        available: {
-          type: Boolean,
-          default: false,
-        },
+        type: Boolean,
+        default: false,
       },
     },
     amenities: {
@@ -41,7 +41,7 @@ const roomSchema = new mongoose.Schema(
       },
     ],
     price: {
-      number: Number,
+      type: Number, // Changed from `number` to `Number`
       required: true,
     },
   },

@@ -1,7 +1,6 @@
 import dbConn from "@/utils/dbConn";
 import Hotels from "@/models/Hotels";
 import { NextRequest, NextResponse } from "next/server";
-//import { getDataFromToken } from "@/app/helpers/getDataFromToken";
 import { checkAdmin } from "@/app/helpers/checkAdmin";
 
 //CREATE HOTELS
@@ -9,19 +8,6 @@ export async function POST(req) {
   try {
     const body = await req.json();
     await dbConn();
-
-    // const { isAdmin } = getDataFromToken(req);
-
-    // if (!isAdmin) {
-    //   return NextResponse.json(
-    //     {
-    //       message:
-    //         "Unauthorized: You are not authorized to can create new hotels",
-    //       success: false,
-    //     },
-    //     { status: 401 }
-    //   );
-    // }
 
     const adminCheckResult = checkAdmin(req); //check if there is some return other than null
 
