@@ -42,7 +42,7 @@ const roomSchema = new mongoose.Schema(
     ],
     price: {
       number: Number,
-      default: true,
+      required: true,
     },
   },
   {

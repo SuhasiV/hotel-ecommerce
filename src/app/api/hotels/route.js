@@ -1,12 +1,33 @@
 import dbConn from "@/utils/dbConn";
 import Hotels from "@/models/Hotels";
 import { NextRequest, NextResponse } from "next/server";
+//import { getDataFromToken } from "@/app/helpers/getDataFromToken";
+import { checkAdmin } from "@/app/helpers/checkAdmin";
 
-//CREATE
+//CREATE HOTELS
 export async function POST(req) {
   try {
     const body = await req.json();
     await dbConn();
+
+    // const { isAdmin } = getDataFromToken(req);
+
+    // if (!isAdmin) {
+    //   return NextResponse.json(
+    //     {
+    //       message:
+    //         "Unauthorized: You are not authorized to can create new hotels",
+    //       success: false,
+    //     },
+    //     { status: 401 }
+    //   );
+    // }
+
+    const adminCheckResult = checkAdmin(req); //check if there is some return other than null
+
+    if (adminCheckResult) {
+      return adminCheckResult; //return unauthorized response
+    }
 
     const newHotel = await Hotels.create(body);
 
@@ -20,7 +41,7 @@ export async function POST(req) {
   }
 }
 
-//GET ALL
+//GET ALL HOTELS
 export async function GET() {
   try {
     await dbConn();
@@ -36,16 +57,16 @@ export async function GET() {
 }
 
 //DELETE
-//export async function DELETE(req) {
-//  try {
-//    const id = await req.nextUrl.searchParams.get("id");
-//    await dbConn();
-//
-//    await Hotels.findByIdAndDelete(id);
-//    return NextResponse.json({
-//      message: "hotel deleted sucessfully",
-//    });
-//  } catch (error) {
-//    return NextResponse.json({ error: error.message }, { status: 502 });
-//  }
-//}
+export async function DELETE(req) {
+  try {
+    const id = await req.nextUrl.searchParams.get("id");
+    await dbConn();
+
+    await Hotels.findByIdAndDelete(id);
+    return NextResponse.json({
+      message: "hotel deleted sucessfully",
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 502 });
+  }
+}

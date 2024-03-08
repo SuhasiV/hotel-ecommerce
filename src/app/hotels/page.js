@@ -48,10 +48,6 @@
 
 import styles from "@/app/hotels/hotels.module.scss";
 import CheckIn from "../components/checkIn/CheckIn";
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import { Navigation } from "swiper/modules";
 import HotelsList from "../components/hotelsList/HotelsList";
 
 const page = () => {

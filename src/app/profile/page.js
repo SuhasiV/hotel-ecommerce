@@ -1,5 +1,6 @@
 import Link from "next/link";
 import UserProfile from "../components/UserProfile";
+import styles from "./profile.module.scss";
 
 const page = () => {
   return (
@@ -10,12 +11,7 @@ const page = () => {
       </div>
       <div>
         <h3>Buttons</h3>
-        <button>
-          <Link href="/profile/login">Login</Link>
-        </button>
-        <button>
-          <Link href="/profile/signup">Signup</Link>
-        </button>
+
         <button>
           <Link href="/profile/logout">logout</Link>
         </button>
