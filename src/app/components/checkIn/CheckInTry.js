@@ -10,37 +10,39 @@ import Link from "next/link";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import BedroomParentIcon from "@mui/icons-material/BedroomParent";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useUrlData } from "@/app/helpers/useUrlData";
 
-const CheckIn = () => {
+const CheckInTry = () => {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
-  const dest = searchParams.get("dest") ?? null;
-  const startD = searchParams.get("startDate");
-  const endD = searchParams.get("endDate");
-  const room = searchParams.get("room") ?? "1";
+  // Parse the query string
+  const query = searchParams.toString();
+  const params = new URLSearchParams(query);
+  const destinationFromQuery = params.get("dest");
+  const startDateFromQuery = params.get("startDate");
+  const endDateFromQuery = params.get("endDate");
+  const roomFromQuery = params.get("room");
 
-  const startDate = startD ? new Date(startD) : new Date();
-  const endDate = endD ? new Date(endD) : null;
-
-  const [destination, setDestination] = useState(dest);
+  // Set initial state values based on the query string
+  const [destination, setDestination] = useState(destinationFromQuery || "");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
-      startDate: startDate,
-      endDate: endDate,
+      startDate: startDateFromQuery ? new Date(startDateFromQuery) : new Date(),
+      endDate: endDateFromQuery ? new Date(endDateFromQuery) : null,
       key: "selection",
     },
   ]);
   const [option, setOption] = useState({
-    room: room,
+    room: roomFromQuery || "1",
   });
 
   const [openOption, setOpenOption] = useState(false);
 
-  // useEffect(() => {
-  //   dest ? setDestination(dest) : setDestination(null);
-  // }, []);
+  // Update the query string whenever state values change
+  const queryFromState = useUrlData(destination, date, option);
 
   const handleOption = (name, operation) => {
     setOption((prev) => {
@@ -52,17 +54,9 @@ const CheckIn = () => {
     });
   };
 
-  const stringStartDate = date[0]?.startDate?.toISOString();
-  const stringEndDate = date[0]?.endDate?.toISOString();
-
-  const query = `dest=${destination}&startDate=${stringStartDate}&endDate=${stringEndDate}&room=${option.room}`;
-
-  // const queryParams = `dest=${encodeURIComponent(
-  //   destination
-  // )}&startDate=${encodeURIComponent(
-  //   date[0].startDate
-  // )}&endDate=${encodeURIComponent(date[0].endDate)}`;
-  // const optionParams = new URLSearchParams(option).toString();
+  const handleClick = () => {
+    router.push(`/hotels?${queryFromState}`);
+  };
 
   return (
     <div className={styles.container}>
@@ -138,14 +132,9 @@ const CheckIn = () => {
           </div>
         </div>
 
-        <div className={styles.section}>
+        <div className={styles.section} onClick={handleClick}>
           <div className={styles.sectionButton}>
-            <Link
-              href={`/hotels?${query}`} // href={`/hotels?${queryParams}&${optionParams}`}
-              className={styles.button}
-            >
-              Check Now
-            </Link>
+            <div className={styles.button}>Check Now</div>
           </div>
         </div>
       </div>
@@ -153,4 +142,4 @@ const CheckIn = () => {
   );
 };
 
-export default CheckIn;
+export default CheckInTry;

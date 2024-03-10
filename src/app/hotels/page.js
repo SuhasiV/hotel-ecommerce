@@ -49,12 +49,13 @@
 import styles from "@/app/hotels/hotels.module.scss";
 import CheckIn from "../components/checkIn/CheckIn";
 import HotelsList from "../components/hotelsList/HotelsList";
+import CheckInTry from "../components/checkIn/CheckInTry";
 
 const page = () => {
   return (
     <div className={styles.container}>
       <div style={{ paddingTop: "65px" }}></div>
-      <CheckIn className={styles.checkIn} />
+      <CheckInTry className={styles.checkIn} />
       <div className={styles.wrapper}>
         <HotelsList />
       </div>

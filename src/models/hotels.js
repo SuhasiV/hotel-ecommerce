@@ -4,10 +4,7 @@ const hotelSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-  },
-  type: {
-    type: String,
-    required: true,
+    unique: true,
   },
   city: {
     type: String,
@@ -61,7 +58,7 @@ const hotelSchema = new mongoose.Schema({
     spa: {
       available: {
         type: Boolean,
-        default: true,
+        default: false,
       },
       spaId: {
         type: String,
@@ -70,7 +67,7 @@ const hotelSchema = new mongoose.Schema({
     dining: {
       available: {
         type: Boolean,
-        default: true,
+        default: false,
       },
       restId: {
         type: String,
@@ -87,10 +84,21 @@ const hotelSchema = new mongoose.Schema({
   },
   cheapestPrice: {
     type: Number,
+    required: true,
   },
-  isfeatured: {
-    type: Boolean,
-    default: false,
+  type: {
+    isNew: {
+      type: Boolean,
+      default: false,
+    },
+    isFeatured: {
+      type: Boolean,
+      default: false,
+    },
+    isPopular: {
+      type: Boolean,
+      default: false,
+    },
   },
 });
 

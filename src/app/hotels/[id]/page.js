@@ -197,6 +197,7 @@ import AcUnitIcon from "@mui/icons-material/AcUnit";
 import BathtubIcon from "@mui/icons-material/Bathtub";
 
 import RoomCard from "@/app/components/roomCard/RoomCard";
+import CheckInTry from "@/app/components/checkIn/CheckInTry";
 
 const page = () => {
   const data = {
@@ -319,7 +320,7 @@ const page = () => {
           </div>
         </div>{" "}
       </div>
-      <CheckIn />
+      <CheckInTry />
       <div className={styles.wrapper}>
         <div className={styles.section}>
           {" "}

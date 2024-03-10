@@ -9,19 +9,14 @@ const HotelsList = () => {
   const searchParams = useSearchParams();
 
   const dest = searchParams.get("dest") ?? null;
-  const startD = searchParams.get("startDate");
-  const endD = searchParams.get("endDate");
-  const room = searchParams.get("room") ?? "1";
-
-  const startDate = startD ? new Date(startD) : new Date();
-  const endDate = endD ? new Date(endD) : null;
-
   const [hotels, setHotels] = useState([]);
 
   useEffect(() => {
     const getHotels = async () => {
       try {
-        const response = await axios.get("/api/hotels");
+        const url = dest === "" || dest === "null" ? "" : `?dest=${dest}`;
+
+        const response = await axios.get(`/api/hotels${url}`);
         const data = response?.data?.hotels;
 
         setHotels(data);
@@ -30,42 +25,7 @@ const HotelsList = () => {
       }
     };
     getHotels();
-  }, []);
-
-  //const data = [
-  //   {
-  //     name: "The Chapter Kyoto, a Tribute Portfolio Hotel",
-  //     review: "5",
-  //     desc: "Discover our stylish Kyoto, Japan, hotel near Kawaramachi Street in the city center.",
-  //     price: "4500",
-  //     img: ["/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg"],
-  //     available: false,
-  //   },
-  //   {
-  //     name: "The Chapter Kyoto, a Tribute Portfolio Hotel",
-  //     review: "5",
-  //     desc: "Discover our stylish Kyoto, Japan, hotel near Kawaramachi Street in the city center.",
-  //     price: "4500",
-  //     img: ["/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg"],
-  //     available: true,
-  //   },
-  //   {
-  //     name: "The Chapter Kyoto, a Tribute Portfolio Hotel",
-  //     review: "5",
-  //     desc: "Discover our stylish Kyoto, Japan, hotel near Kawaramachi Street in the city center.",
-  //     price: "4500",
-  //     img: ["/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg"],
-  //     available: true,
-  //   },
-  //   {
-  //     name: "The Chapter Kyoto, a Tribute Portfolio Hotel",
-  //     review: "5",
-  //     desc: "Discover our stylish Kyoto, Japan, hotel near Kawaramachi Street in the city center.",
-  //     price: "4500",
-  //     img: ["/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg", "/hotel1.jpg"],
-  //     available: false,
-  //   },
-  // ];
+  }, [dest]);
 
   return (
     <div className={styles.hotels}>
