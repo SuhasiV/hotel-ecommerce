@@ -7,9 +7,12 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import Link from "next/link";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import BedroomParentIcon from "@mui/icons-material/BedroomParent";
 
 const CheckIn = () => {
-  const [destination, setDestination] = useState();
+  // const [destination, setDestination] = useState();
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
     {
@@ -19,8 +22,6 @@ const CheckIn = () => {
     },
   ]);
   const [option, setOption] = useState({
-    adult: "1",
-    children: "0",
     room: "1",
   });
   const [openOption, setOpenOption] = useState(false);
@@ -35,26 +36,25 @@ const CheckIn = () => {
     });
   };
 
-  const queryParams = `dest=${encodeURIComponent(
-    destination
-  )}&startDate=${encodeURIComponent(
-    date[0].startDate
-  )}&endDate=${encodeURIComponent(date[0].endDate)}`;
-  const optionParams = new URLSearchParams(option).toString();
+  // const queryParams = `dest=${encodeURIComponent(
+  //   destination
+  // )}&startDate=${encodeURIComponent(
+  //   date[0].startDate
+  // )}&endDate=${encodeURIComponent(date[0].endDate)}`;
+  // const optionParams = new URLSearchParams(option).toString();
 
   return (
-    <div className={styles.header}>
-      <div className={styles.container}>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
         <div className={styles.section}>
-          <div className={styles.sectionLabel}>Destination</div>
+          <LocationOnIcon className={styles.icons} />
+          <input
+            type="text"
+            placeholder="Select destination"
+            onChange={(e) => setDestination(e.target.value)}
+          />
           <div className={styles.sectionData}>
-            <span className={styles.largeText}>
-              <input
-                type="text"
-                placeholder="Delhi"
-                onChange={(e) => setDestination(e.target.value)}
-              />
-            </span>
+            <span className={styles.largeText}></span>
           </div>
         </div>
         <div
@@ -63,7 +63,19 @@ const CheckIn = () => {
             setOpenDate(!openDate);
           }}
         >
-          <div className={styles.sectionLabel}>Checkin & Checkout</div>
+          <CalendarMonthIcon className={styles.icons} />
+
+          <span className={styles.largeText}>
+            {`${
+              date[0].startDate
+                ? format(date[0].startDate, "dd/MM/yyyy")
+                : "Check In"
+            } - ${
+              date[0].endDate
+                ? format(date[0].endDate, "dd/MM/yyyy")
+                : "Check Out"
+            }`}
+          </span>
           {openDate && (
             <DateRange
               editableDateInputs={true}
@@ -74,52 +86,11 @@ const CheckIn = () => {
               minDate={new Date()}
             />
           )}
-          <div className={styles.sectionData}>
-            <span className={styles.largeText}>
-              {`${
-                date[0].startDate
-                  ? format(date[0].startDate, "dd/MM/yyyy")
-                  : "Check In"
-              } - ${
-                date[0].endDate
-                  ? format(date[0].endDate, "dd/MM/yyyy")
-                  : "Check Out"
-              }`}
-            </span>
-          </div>
         </div>
         <div className={styles.section}>
-          <div className={styles.sectionLabel}>Rooms & Guests</div>
+          <BedroomParentIcon className={styles.icons} />
           {openOption && (
             <div className={styles.options}>
-              <div className={styles.subOption}>
-                <div className={styles.optionLabel}>Adults:</div>
-                <div className={styles.optionValue}>
-                  <button
-                    disabled={option.adult <= 1}
-                    onClick={() => handleOption("adult", "d")}
-                  >
-                    -
-                  </button>
-                  <span> {option.adult}</span>
-                  <button onClick={() => handleOption("adult", "i")}>+</button>
-                </div>
-              </div>
-              <div className={styles.subOption}>
-                <div className={styles.optionLabel}>Children:</div>
-                <div className={styles.optionValue}>
-                  <button
-                    disabled={option.children <= 1}
-                    onClick={() => handleOption("children", "d")}
-                  >
-                    -
-                  </button>
-                  <span>{option.children}</span>
-                  <button onClick={() => handleOption("children", "i")}>
-                    +
-                  </button>
-                </div>
-              </div>
               <div className={styles.subOption}>
                 <div className={styles.optionLabel}>Room:</div>
                 <div className={styles.optionValue}>
@@ -142,16 +113,20 @@ const CheckIn = () => {
               setOpenOption(!openOption);
             }}
           >
-            <span className={styles.largeText}>{option.adult}</span> Adults{" "}
-            <span className={styles.largeText}>{option.children}</span> Children{" "}
             <span className={styles.largeText}>{option.room}</span> Room
           </div>
         </div>
 
-        <div className={styles.section} style={{ background: "#333" }}>
-          <Link href={`/hotels?${queryParams}&${optionParams}`}>
-            <div className={styles.sectionButton}>Check Now</div>
-          </Link>
+        <div className={styles.section}>
+          <div className={styles.sectionButton}>
+            <Link
+              href="/"
+              // href={`/hotels?${queryParams}&${optionParams}`}
+              className={styles.button}
+            >
+              Check Now
+            </Link>
+          </div>
         </div>
       </div>
     </div>

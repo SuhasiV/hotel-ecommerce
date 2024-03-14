@@ -2,12 +2,12 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
-import Slider from "./components/Slider";
 import CheckIn from "./components/checkIn/CheckIn";
 import Layout1 from "./components/Layout1";
 import NewHotels from "./components/newHotels/NewHotels";
 import DestinationCard from "./components/destinationSlider/DestinationSlider";
 import Banner from "./components/banner/Banner";
+import HomeSlider from "./components/homeSlider/HomeSlider";
 
 export default function Home() {
   const subheading = "ABout Us";
@@ -24,9 +24,9 @@ export default function Home() {
 
   return (
     <main className={styles.main}>
-      <Slider />
+      <HomeSlider />
+      <CheckIn />
       <div className={styles.wrapper}>
-        <CheckIn />
         {/* <Layout1
           subheading={subheading}
           heading={heading}

@@ -1,0 +1,47 @@
+.container {
+  display: flex;
+  border: 1px solid #a0a0a0;
+
+  .left {
+    flex: 1;
+  }
+
+  .right {
+    flex: 1;
+    padding: 20px;
+
+    .desc {
+      ul {
+        text-decoration: none;
+        list-style: none;
+
+        li {
+          padding: 5px 0px;
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+    .price {
+      display: flex;
+      justify-content: end;
+      padding: 5px 20px 15px 20px;
+    }
+  }
+}
+
+.button {
+  margin: 0px 6px;
+  padding: 10px 15px;
+  background-color: #4a4e69;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-weight: 700;
+
+  &:hover {
+    background-color: #22223b;
+  }
+}
