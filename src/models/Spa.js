@@ -6,6 +6,10 @@ const spaSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    hotelId: {
+      type: String,
+      required: true,
+    },
     desc: {
       type: String,
       required: true,
@@ -19,6 +23,7 @@ const spaSchema = new mongoose.Schema(
     },
     address: {
       type: [String],
+      required: true,
     },
     rating: {
       type: Number,
@@ -28,10 +33,6 @@ const spaSchema = new mongoose.Schema(
     features: {
       type: [String],
       required: true,
-    },
-    isfeatured: {
-      type: Boolean,
-      default: false,
     },
     spaNumbers: [
       {

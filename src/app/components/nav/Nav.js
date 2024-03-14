@@ -28,9 +28,6 @@ export const Nav = () => {
           <Link href="/hotels" className={styles.nav_link}>
             Our Hotels
           </Link>
-          <Link href="/about" className={styles.nav_link}>
-            About
-          </Link>
           <Link href="/dining" className={styles.nav_link}>
             Dining
           </Link>

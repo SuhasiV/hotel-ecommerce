@@ -6,28 +6,25 @@ import jwt from "jsonwebtoken";
 
 export async function POST(req) {
   try {
-    const body = await req.json();
-    const { email, password } = body;
+    const reqBody = await req.json();
+    const { email, password } = reqBody;
     await dbConnect();
 
     const user = await User.findOne({ email });
-
     if (!user) {
       return NextResponse.json(
-        { message: "User does not exist" },
+        { error: "User does not exist" },
         { status: 400 }
       );
     }
+    console.log("user exists");
 
     //check password
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
-      return NextResponse.json(
-        { message: "Password incorrect" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
-
+    console.log(user);
     //create token data
     const tokenData = {
       id: user._id,
@@ -36,15 +33,17 @@ export async function POST(req) {
     };
 
     //create token
-    const token = await jwt.sign(tokenData, process.env.JWT);
+    const token = jwt.sign(tokenData, process.env.JWT, {
+      expiresIn: "10d",
+    });
 
     const response = NextResponse.json({
       message: "Login successful",
-      sucess: true,
+      success: true,
     });
-
-    response.cookies.set("token", token, { httpOnly: true });
-
+    response.cookies.set("token", token, {
+      httpOnly: true,
+    });
     return response;
   } catch (err) {
     return NextResponse.json({ error: err.message }, { status: 500 });

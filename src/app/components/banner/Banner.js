@@ -1,4 +1,5 @@
 import styles from "@/app/components/banner/banner.module.scss";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -31,7 +32,9 @@ const Banner = () => {
             the difference in your mind, body and soul.
           </p>
           <br />
-          <div className="buttonBookNow">Read More</div>
+          <Link href="/hotels" style={{ textDecoration: "none" }}>
+            <div className="buttonBookNow">Explore More</div>
+          </Link>
         </div>
       </div>
     </div>
