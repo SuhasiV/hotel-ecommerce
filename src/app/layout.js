@@ -1,6 +1,6 @@
 import Head from "next/head";
 
-import "./globals.css";
+import "./globals.scss";
 import { Nav } from "./components/nav/Nav";
 import { Footer } from "./components/footer/Footer";
 import { Raleway } from "next/font/google";

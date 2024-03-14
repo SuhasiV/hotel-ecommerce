@@ -13,7 +13,7 @@ const RestList = ({ restId }) => {
     const restDetail = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/restraunt?id=${restId}`);
+        const response = await axios.get(`/api/restraunt/hotel?id=${restId}`);
         const data = response?.data?.rest;
         setRest(data);
         setLoading(false);
@@ -30,7 +30,7 @@ const RestList = ({ restId }) => {
   if (error) return <div>Error: {error.message}</div>;
   return (
     <div>
-      <RestAndSpaCard data={rest} />
+      <RestAndSpaCard data={rest} type="rest" />
     </div>
   );
 };

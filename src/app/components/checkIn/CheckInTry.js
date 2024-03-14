@@ -15,7 +15,7 @@ import { useSearchParams } from "next/navigation";
 import { useUrlData } from "@/app/helpers/useData";
 import { SearchContext } from "@/app/context/SearchContext";
 
-const CheckInTry = () => {
+const CheckInTry = (type) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   // const { selectedQuery, setSelectedQuery } = useSelectedQuery();
@@ -109,35 +109,39 @@ const CheckInTry = () => {
             />
           )}
         </div>
-        <div className={styles.section}>
-          <BedroomParentIcon className={styles.icons} />
-          {openOption && (
-            <div className={styles.options}>
-              <div className={styles.subOption}>
-                <div className={styles.optionLabel}>Room:</div>
-                <div className={styles.optionValue}>
-                  <button
-                    disabled={option.room <= 1}
-                    onClick={() => handleOption("room", "d")}
-                  >
-                    -
-                  </button>
-                  <span>{option.room}</span>
-                  <button onClick={() => handleOption("room", "i")}>+</button>
+        {type === "hotel" ? (
+          <div className={styles.section}>
+            <BedroomParentIcon className={styles.icons} />
+            {openOption && (
+              <div className={styles.options}>
+                <div className={styles.subOption}>
+                  <div className={styles.optionLabel}>Room:</div>
+                  <div className={styles.optionValue}>
+                    <button
+                      disabled={option.room <= 1}
+                      onClick={() => handleOption("room", "d")}
+                    >
+                      -
+                    </button>
+                    <span>{option.room}</span>
+                    <button onClick={() => handleOption("room", "i")}>+</button>
+                  </div>
                 </div>
               </div>
-            </div>
-          )}
+            )}
 
-          <div
-            className={styles.sectionData}
-            onClick={() => {
-              setOpenOption(!openOption);
-            }}
-          >
-            <span className={styles.largeText}>{option.room}</span> Room
+            <div
+              className={styles.sectionData}
+              onClick={() => {
+                setOpenOption(!openOption);
+              }}
+            >
+              <span className={styles.largeText}>{option.room}</span> Room
+            </div>
           </div>
-        </div>
+        ) : (
+          ""
+        )}
 
         <div className={styles.section} onClick={handleClick}>
           <div className={styles.sectionButton}>

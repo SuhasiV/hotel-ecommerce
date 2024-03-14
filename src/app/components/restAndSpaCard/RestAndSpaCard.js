@@ -1,7 +1,9 @@
 import StarIcon from "@mui/icons-material/Star";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import styles from "./restAndSpaCard.module.scss";
-const RestAndSpaCard = ({ data }) => {
+import Link from "next/link";
+const RestAndSpaCard = ({ data, type }) => {
+  const url = type === "spa" ? `/spa/${data._id}` : `/dining/${data._id}`;
   return (
     <div className={styles.facility}>
       {" "}
@@ -20,9 +22,12 @@ const RestAndSpaCard = ({ data }) => {
       </div>
       <div className={styles.right}>
         {" "}
-        <div className="title1">{data?.name} Spa</div>
+        <div className="title1">
+          {data?.name}
+          {type === "spa" ? " Spa" : " Restraunt"}
+        </div>
         <div className={styles.review}>
-          {Array.from({ length: data.rating }, (_, index) => (
+          {Array.from({ length: data?.rating }, (_, index) => (
             <StarIcon
               key={`${data.rating}-${index}`}
               style={{ color: "#9a8c98", fontSize: "20px" }}
@@ -31,9 +36,12 @@ const RestAndSpaCard = ({ data }) => {
         </div>
         <p style={{ display: "flex", alignItems: "center" }}>
           <LocationOnIcon />
-          {data.address}
+          {data?.address}
         </p>
-        <p>{data?.desc}</p> <button>Know More</button>
+        <p>{data?.desc}</p>{" "}
+        <Link href={url} className="link">
+          <button>Know More</button>
+        </Link>
       </div>{" "}
     </div>
   );

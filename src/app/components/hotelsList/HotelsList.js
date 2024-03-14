@@ -30,7 +30,7 @@ const HotelsList = () => {
   return (
     <div className={styles.hotels}>
       {hotels.map((hotel, index) => (
-        <SearchItem key={`${hotel.name}-${index}`} hotel={hotel} />
+        <SearchItem key={`${hotel.name}-${index}`} data={hotel} />
       ))}
     </div>
   );

@@ -64,3 +64,24 @@ body {
 .buttonBookNow:hover {
   background-color: #9a8c98;
 }
+
+.buttonDarkBlue {
+  width: fit-content;
+  margin: 0px 6px;
+  padding: 10px 20px;
+  background-color: #4a4e69;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-weight: 700;
+
+  &:hover {
+    background-color: #22223b;
+  }
+}
+
+.link {
+  text-decoration: none;
+}

@@ -69,3 +69,19 @@ export async function DELETE(req, { params }) {
     );
   }
 }
+
+//GET SINGLE SPA
+export async function GET(req) {
+  try {
+    const id = await req.nextUrl.searchParams.get("id");
+    await dbConn();
+
+    const spa = await Spa.findOne({ _id: id });
+    return NextResponse.json({
+      message: "Single spa extracted sucessfully",
+      spa,
+    });
+  } catch (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+}

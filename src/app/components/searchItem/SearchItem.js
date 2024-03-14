@@ -5,15 +5,14 @@ import EastIcon from "@mui/icons-material/East";
 import styles from "@/app/components/searchItem/searchItem.module.scss";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 
-const SearchItem = ({ hotel }) => {
-  const desc = hotel.desc;
-  const slicedDesc = desc.slice(0, 1).join("");
+const SearchItem = ({ data }) => {
+  const desc = data.desc;
   return (
     <div className={styles.hotel}>
       <div
         className={styles.left}
         style={{
-          background: `url(/${hotel.photos[0]})`,
+          background: `url(/${data.photos[0]})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -21,32 +20,45 @@ const SearchItem = ({ hotel }) => {
       <div className={styles.right}>
         <div className={styles.info}>
           <div className="title1" style={{ fontSize: "25px" }}>
-            {hotel.name}
+            {data.name}
           </div>
           <div className={styles.review}>
-            {Array.from({ length: hotel.rating }, (_, index) => (
+            {Array.from({ length: data.rating }, (_, index) => (
               <StarIcon
-                key={`${hotel.rating}-${index}`}
+                key={`${data.rating}-${index}`}
                 style={{ color: "#9a8c98", fontSize: "20px" }}
               />
             ))}
           </div>
           <p style={{ display: "flex", alignItems: "center" }}>
             <LocationOnIcon />
-            {hotel.address.join(", ")}
+            {data.address.join(", ")}
           </p>
-          <div className={styles.desc}>{slicedDesc}...</div>
+          <div className={styles.desc}>{desc}...</div>
         </div>
         <hr />
         <div className={styles.price}>
           <div>
-            <span style={{ fontWeight: "700", fontSize: "22px" }}>
-              {hotel.cheapestPrice}
-            </span>
-            /night <small>(incl GST)</small>
-            <Link href={`/hotels/${hotel._id}`}>
-              <button className={styles.button}>View Hotel</button>
-            </Link>
+            {data.inRoomAmenities ? (
+              <div>
+                {" "}
+                <span style={{ fontWeight: "700", fontSize: "22px" }}>
+                  {data.cheapestPrice}
+                </span>
+                /night <small>(incl GST)</small>
+                <Link href={`/hotels/${data._id}`}>
+                  <button className={styles.button}>View Details</button>
+                </Link>
+              </div>
+            ) : data.spaNumbers ? (
+              <Link href={`/spa/${data._id}`}>
+                <button className={styles.button}>View Details</button>
+              </Link>
+            ) : (
+              <Link href={`/dining/${data._id}`}>
+                <button className={styles.button}>View Details</button>
+              </Link>
+            )}
           </div>
         </div>
       </div>

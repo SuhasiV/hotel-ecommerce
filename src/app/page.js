@@ -12,7 +12,7 @@ export default function Home() {
   return (
     <main className={styles.main}>
       <HomeSlider />
-      <CheckInTry />
+      <CheckInTry type="hotel" />
       <div className={styles.wrapper}>
         <NewHotels />
         <DestinationCard type="isFeatured" />

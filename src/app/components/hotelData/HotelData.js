@@ -144,7 +144,10 @@ const HotelData = (params) => {
               </div>
               <div className={styles.info}>
                 {hotel?.facilities?.spaId ? (
-                  <SpaList spaId={hotel?.facilities?.spaId} />
+                  <SpaList
+                    spaId={hotel?.facilities?.spaId}
+                    hotelId={params.id}
+                  />
                 ) : null}
                 {hotel?.facilities?.restId ? (
                   <RestList restId={hotel?.facilities?.restId} />

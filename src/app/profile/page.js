@@ -1,8 +1,7 @@
 import Link from "next/link";
 import UserProfile from "../components/userprofile/UserProfile";
 import styles from "./profile.module.scss";
-import BedroomParentIcon from "@mui/icons-material/BedroomParent";
-import HotelCheckOut from "../components/hotelCheckOut/HotelCheckOut";
+import HotelCheckOut from "../components/checkOut/CheckOut";
 
 const page = () => {
   return (

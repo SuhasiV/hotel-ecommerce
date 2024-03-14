@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import RestAndSpaCard from "../restAndSpaCard/RestAndSpaCard";
 
-const SpaList = ({ spaId }) => {
+const SpaList = ({ spaId, hotelId }) => {
   const [spa, setSpa] = useState({});
   const [loading, setLoading] = useState();
   const [error, setError] = useState();
@@ -13,7 +13,7 @@ const SpaList = ({ spaId }) => {
     const spaDetail = async () => {
       try {
         setLoading(true);
-        const response = await axios.get(`/api/spa?id=${spaId}`);
+        const response = await axios.get(`/api/spa/${hotelId}?id=${spaId}`);
         const data = response?.data?.spa;
 
         setSpa(data);
@@ -25,13 +25,13 @@ const SpaList = ({ spaId }) => {
       }
     };
     spaDetail();
-  }, [spaId]);
+  }, [spaId, hotelId]);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
   return (
     <div>
-      <RestAndSpaCard data={spa} />
+      <RestAndSpaCard data={spa} type="spa" />
     </div>
   );
 };

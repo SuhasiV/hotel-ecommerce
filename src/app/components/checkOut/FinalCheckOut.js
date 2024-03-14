@@ -1,7 +1,6 @@
 "use client";
-
 import { useContext, useEffect, useState } from "react";
-import styles from "./hotelCheckOut.module.scss";
+import styles from "./checkOut.module.scss";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import axios from "axios";
 import { format } from "date-fns";
@@ -9,7 +8,7 @@ import Link from "next/link";
 import { SearchContext } from "@/app/context/SearchContext";
 import { useRouter } from "next/navigation";
 
-const HotelCheckOut = () => {
+const FinalCheckOut = () => {
   const stringData = localStorage.getItem("SelectedRoomDetails");
   const { hotelId, roomId, allDates, rooms, availableRoomList } =
     JSON.parse(stringData);
@@ -51,20 +50,15 @@ const HotelCheckOut = () => {
     return acc;
   }, []);
 
-  const roomIdsToUpdate = availableRoomIds.slice(0, rooms);
-  console.log(roomIdsToUpdate);
-
-  console.log(allDates);
-
   const handleBookNow = async () => {
     try {
-      const response = await axios.put(`/api/rooms/${roomId}`, {
-        roomIdsToUpdate,
-        allDates,
-      });
-      router.push("/profile/success");
+      const response = await axios.put(
+        `api/rooms/${roomId}`,
+        availableRoomIds,
+        allDates
+      );
     } catch (err) {
-      console.error("Error occured while updating room", err);
+      console.log(err.message);
     }
   };
   const handleCancel = () => {
@@ -73,7 +67,8 @@ const HotelCheckOut = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div>
+      {" "}
       <div className="title1" style={{ color: "#4a4e69" }}>
         {hotel?.name}
       </div>
@@ -151,4 +146,4 @@ const HotelCheckOut = () => {
   );
 };
 
-export default HotelCheckOut;
+export default FinalCheckOut;
