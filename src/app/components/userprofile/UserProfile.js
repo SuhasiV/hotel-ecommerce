@@ -1,15 +1,15 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import styles from "./userProfile.module.scss";
 
 const UserProfile = () => {
-  const [userData, setUserData] = useState("nothing");
+  const [userData, setUserData] = useState({});
   useEffect(() => {
     const getUserDetails = async () => {
       try {
         const response = await axios.get("/api/userProfile");
 
-        console.log("resp", response.data.data);
         setUserData(response.data.data);
       } catch (err) {
         console.log("error fetching user data ", err);
@@ -18,11 +18,15 @@ const UserProfile = () => {
     getUserDetails();
   }, []);
   return (
-    <div>
-      <h5>UserProfile</h5>
-      USERNAME: {userData.username}
-      <br />
-      EMAIL: {userData.email}
+    <div className={styles.container}>
+      <div className={styles.section}>
+        <span className={styles.heading}>Username - </span> {userData.username}
+      </div>
+      <div className={styles.section}>
+        {" "}
+        <span className={styles.heading}>User Email - </span>
+        {userData.email}
+      </div>
     </div>
   );
 };

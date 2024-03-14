@@ -33,7 +33,7 @@ export async function POST(req) {
     };
 
     //create token
-    const token = await jwt.sign(tokenData, process.env.JWT, {
+    const token = jwt.sign(tokenData, process.env.JWT, {
       expiresIn: "10d",
     });
 

@@ -14,7 +14,7 @@ const HotelsList = () => {
   useEffect(() => {
     const getHotels = async () => {
       try {
-        const url = dest === "" || dest === "null" ? "" : `?dest=${dest}`;
+        const url = dest === null || dest === "" ? "" : `?dest=${dest}`;
 
         const response = await axios.get(`/api/hotels${url}`);
         const data = response?.data?.hotels;

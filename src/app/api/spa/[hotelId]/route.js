@@ -19,7 +19,7 @@ export async function POST(req, { params }) {
     const updatedHotel = await Hotel.findByIdAndUpdate(
       hotelId,
       {
-        $push: { "facilities.spa.spaId": newSpa._id },
+        $set: { "facilities.SpaId": newSpa._id }, // Use $set to update the restId object
       },
       { new: true }
     );
@@ -51,7 +51,7 @@ export async function DELETE(req, { params }) {
     await Spa.findByIdAndDelete(spaId);
 
     await Hotel.findByIdAndUpdate(hotelId, {
-      $pull: { "facilities.spa.spaId": spaId },
+      $unset: { "facilities.spaId": null }, // Use $unset to delete the restId field
     });
 
     return NextResponse.json({

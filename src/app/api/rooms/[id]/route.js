@@ -31,17 +31,28 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
   try {
     const { id } = params;
+    console.log(id);
     const body = await req.json();
-
-    const adminCheckResult = checkAdmin(req); //check if there is some return other than null
-
-    if (adminCheckResult) {
-      return adminCheckResult; //return unauthorized response
+    await dbConn();
+    const room = await Room.findById(id);
+    if (!room) {
+      return NextResponse.json(
+        {
+          error: "Room not found",
+        },
+        {
+          status: 404,
+        }
+      );
     }
 
-    await dbConn();
+    room.roomNumbers.forEach((roomNumber) => {
+      if (body.roomIdsToUpdate.includes(roomNumber._id.toString())) {
+        roomNumber.unavailableDates.push(...body.allDates);
+      }
+    });
 
-    const room = await Room.findByIdAndUpdate(id, body, { new: true });
+    await room.save();
 
     return NextResponse.json({
       message: "Room updated sucessfully",
@@ -58,3 +69,29 @@ export async function PUT(req, { params }) {
     );
   }
 }
+
+// //UPDATE
+// export async function PUT(req, { params }) {
+//   try {
+//     const { id } = params;
+//     const body = await req.json();
+
+//     await dbConn();
+
+//     const room = await Room.findByIdAndUpdate(id, body, { new: true });
+
+//     return NextResponse.json({
+//       message: "Room updated sucessfully",
+//       room,
+//     });
+//   } catch (error) {
+//     return NextResponse.json(
+//       {
+//         error: error.message,
+//       },
+//       {
+//         status: 500,
+//       }
+//     );
+//   }
+// }

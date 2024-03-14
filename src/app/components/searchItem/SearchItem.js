@@ -3,8 +3,11 @@ import StarIcon from "@mui/icons-material/Star";
 import Link from "next/link";
 import EastIcon from "@mui/icons-material/East";
 import styles from "@/app/components/searchItem/searchItem.module.scss";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 
 const SearchItem = ({ hotel }) => {
+  const desc = hotel.desc;
+  const slicedDesc = desc.slice(0, 1).join("");
   return (
     <div className={styles.hotel}>
       <div
@@ -14,49 +17,37 @@ const SearchItem = ({ hotel }) => {
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
-      >
-        {/* <Image alt={hotel.name} src={hotel.img[0]} width={300} height={200} /> */}
-      </div>
+      ></div>
       <div className={styles.right}>
         <div className={styles.info}>
           <div className="title1" style={{ fontSize: "25px" }}>
             {hotel.name}
           </div>
           <div className={styles.review}>
-            {Array.from({ length: hotel.ratings }, (_, index) => (
+            {Array.from({ length: hotel.rating }, (_, index) => (
               <StarIcon
-                key={`${hotel.ratings}-${index}`}
-                style={{ color: "#9a8c98", fontSize: "18px" }}
+                key={`${hotel.rating}-${index}`}
+                style={{ color: "#9a8c98", fontSize: "20px" }}
               />
             ))}
           </div>
-          <div className={styles.desc}>{hotel.desc}</div>
-          <div className={styles.detailButton}>
-            {" "}
-            <Link href="/" className={styles.link}>
-              View Hotel Details
-            </Link>
-            <EastIcon className={styles.icon} />
-          </div>
+          <p style={{ display: "flex", alignItems: "center" }}>
+            <LocationOnIcon />
+            {hotel.address.join(", ")}
+          </p>
+          <div className={styles.desc}>{slicedDesc}...</div>
         </div>
         <hr />
         <div className={styles.price}>
-          {hotel.available == true ? (
-            <div>
-              <span style={{ fontWeight: "700", fontSize: "22px" }}>
-                {hotel.price}
-              </span>
-              /night <small>(incl GST)</small>
-              <button className={styles.button}>View Other Dates</button>
-              <button className={styles.button}>Book Now</button>
-            </div>
-          ) : (
-            <div>
-              <span>Sold Out</span>
-
-              <button className={styles.button}>View Other Dates</button>
-            </div>
-          )}
+          <div>
+            <span style={{ fontWeight: "700", fontSize: "22px" }}>
+              {hotel.cheapestPrice}
+            </span>
+            /night <small>(incl GST)</small>
+            <Link href={`/hotels/${hotel._id}`}>
+              <button className={styles.button}>View Hotel</button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

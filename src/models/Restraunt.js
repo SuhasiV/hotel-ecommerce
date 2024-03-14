@@ -34,10 +34,6 @@ const restrauntSchema = new mongoose.Schema(
       type: [String],
       required: true,
     },
-    isfeatured: {
-      type: Boolean,
-      default: false,
-    },
     tableNumbers: [
       {
         number: Number,

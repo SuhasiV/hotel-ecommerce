@@ -1,20 +1,29 @@
 import Link from "next/link";
-import UserProfile from "../components/UserProfile";
+import UserProfile from "../components/userprofile/UserProfile";
 import styles from "./profile.module.scss";
+import BedroomParentIcon from "@mui/icons-material/BedroomParent";
+import HotelCheckOut from "../components/hotelCheckOut/HotelCheckOut";
 
 const page = () => {
   return (
-    <div>
-      <div>
-        <h1>User Profile Details</h1>
-        <UserProfile />
-      </div>
-      <div>
-        <h3>Buttons</h3>
-
-        <button>
-          <Link href="/profile/logout">logout</Link>
-        </button>
+    <div className={styles.container}>
+      <div style={{ padding: "20px" }}></div>
+      <div className={styles.wrapper}>
+        <div className={styles.profile}>
+          <div className={styles.mainTitle}>
+            <span className={styles.userTitle}>User Details</span>
+            <hr />
+            <UserProfile />
+          </div>
+          <div className={styles.logoutLast}>
+            <Link href="/profile/logout">
+              <button className={styles.logout}>Logout</button>
+            </Link>
+          </div>
+        </div>
+        <div className={styles.booking}>
+          <HotelCheckOut />
+        </div>
       </div>
     </div>
   );

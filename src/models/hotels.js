@@ -12,6 +12,7 @@ const hotelSchema = new mongoose.Schema({
   },
   address: {
     type: [String],
+    required: true,
   },
   desc: {
     type: [String],
@@ -41,37 +42,27 @@ const hotelSchema = new mongoose.Schema({
       type: Boolean,
       default: true,
     },
-    breakfast: {
+    service: {
       type: Boolean,
       default: true,
     },
-    bathTub: {
+    care: {
       type: Boolean,
       default: true,
     },
+
     safe: {
       type: Boolean,
       default: true,
     },
   },
   facilities: {
-    spa: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      spaId: {
-        type: String,
-      },
+    spaId: {
+      type: String,
+      default: null,
     },
-    dining: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      restId: {
-        type: String,
-      },
+    restId: {
+      type: String,
     },
   },
   rating: {

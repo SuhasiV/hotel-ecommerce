@@ -14,20 +14,20 @@ export async function POST(req, { params }) {
     body.hotelId = hotelId;
     await dbConn();
 
-    const newRestraunt = await Restraunt.create(body);
+    const newRest = await Restraunt.create(body);
 
     const updatedHotel = await Hotel.findByIdAndUpdate(
       hotelId,
       {
-        $push: { "facilities.dining.restId": newRestraunt._id },
+        $set: { "facilities.restId": newRest._id }, // Use $set to update the restId object
       },
       { new: true }
     );
 
     return NextResponse.json({
-      message: "Restraunt created and hotel updated successfully",
+      message: "Rest created and hotel updated successfully",
       success: true,
-      newRestraunt,
+      newRest,
       updatedHotel,
     });
   } catch (error) {
@@ -51,7 +51,7 @@ export async function DELETE(req, { params }) {
     await Restraunt.findByIdAndDelete(restrauntId);
 
     await Hotel.findByIdAndUpdate(hotelId, {
-      $pull: { "facilities.dining.restId": restrauntId },
+      $unset: { "facilities.restId": null }, // Use $unset to delete the restId field
     });
 
     return NextResponse.json({
