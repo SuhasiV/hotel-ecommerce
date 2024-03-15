@@ -3,13 +3,19 @@
 import Link from "next/link";
 import FinalCheckOut from "./FinalCheckOut";
 import styles from "./checkOut.module.scss";
+import { useState } from "react";
 
 const HotelCheckOut = () => {
-  const stringData = localStorage.getItem("SelectedRoomDetails");
+  const [data, setData] = useState();
+  // const stringData = localStorage.getItem("SelectedRoomDetails");
+  if (typeof window !== "undefined") {
+    const item = localStorage.getItem("SelectedRoomDetails");
+    setData(item);
+  }
 
   return (
     <div className={styles.container}>
-      {stringData ? (
+      {data ? (
         <FinalCheckOut />
       ) : (
         <div style={{}}>

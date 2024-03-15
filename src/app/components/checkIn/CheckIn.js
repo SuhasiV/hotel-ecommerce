@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import styles from "@/app/components/checkIn/checkIn.module.scss";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
@@ -13,6 +13,14 @@ import BedroomParentIcon from "@mui/icons-material/BedroomParent";
 import { useSearchParams } from "next/navigation";
 
 const CheckIn = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CheckInContent />
+    </Suspense>
+  );
+};
+
+const CheckInContent = () => {
   const searchParams = useSearchParams();
 
   const dest = searchParams.get("dest") ?? null;

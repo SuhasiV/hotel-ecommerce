@@ -10,9 +10,8 @@ import BalconyIcon from "@mui/icons-material/Balcony";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { SearchContext } from "@/app/context/SearchContext";
-import { BookRoomContext } from "@/app/context/BookedRoomContext";
 import { useRouter } from "next/navigation";
-import { availableRoom, dateRange } from "@/app/helpers/dateRange";
+import { dateRange } from "@/app/helpers/dateRange";
 
 const RoomCard = ({ data }) => {
   const router = useRouter();
