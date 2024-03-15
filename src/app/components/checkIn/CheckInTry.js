@@ -15,7 +15,8 @@ import { useSearchParams } from "next/navigation";
 import { useUrlData } from "@/app/helpers/useData";
 import { SearchContext } from "@/app/context/SearchContext";
 
-const CheckInTry = (type) => {
+const CheckInTry = ({ type }) => {
+  console.log(type);
   const searchParams = useSearchParams();
   const router = useRouter();
   // const { selectedQuery, setSelectedQuery } = useSelectedQuery();
