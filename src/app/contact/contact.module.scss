@@ -1,0 +1,104 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-image: url("/login.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+
+  .wrapper {
+    margin: 0px auto;
+    width: 80%;
+    background-color: #ffffffb7;
+
+    .info {
+      padding: 50px;
+      display: flex;
+      gap: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .left {
+        flex: 1;
+        background-color: #ffffffb3;
+        padding: 20px;
+        .pageHeading {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+
+          .subHeading {
+            font-size: 22px;
+            text-transform: uppercase;
+            margin-bottom: 0px;
+          }
+          .heading {
+            font-size: 60px;
+            font-weight: bold;
+            margin-bottom: 20px;
+          }
+        }
+
+        .icons {
+          margin: 20px 0px;
+          gap: 10px;
+          display: flex;
+          align-items: center;
+        }
+      }
+
+      .right {
+        flex: 1;
+      }
+    }
+  }
+}
+
+//contact form
+.containerComponent {
+  padding: 20px;
+
+  .section {
+    display: flex;
+    flex-direction: column;
+    label {
+      font-size: 20px;
+      font-weight: 600;
+      padding: 10px 20px;
+    }
+    input {
+      height: 20px;
+      border-radius: 20px;
+      border: none;
+      padding: 10px 20px;
+    }
+  }
+  button {
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    background-color: #4a4e69;
+    color: #fff;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #c9ada7;
+      color: #000;
+    }
+  }
+
+  textarea {
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+  }
+}

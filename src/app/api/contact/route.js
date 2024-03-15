@@ -6,7 +6,6 @@ import { NextResponse } from "next/server";
 export async function POST(req, res) {
   try {
     const referer = req.headers.get("Referer");
-    console.log("referer");
     const body = await req.json();
     await dbConn();
 

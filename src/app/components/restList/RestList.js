@@ -22,7 +22,6 @@ const RestList = () => {
     getRests();
   }, []);
 
-  console.log(rest);
   return (
     <div
       className={styles.hotels}

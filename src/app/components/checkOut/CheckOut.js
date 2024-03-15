@@ -6,7 +6,6 @@ import styles from "./checkOut.module.scss";
 
 const HotelCheckOut = () => {
   const stringData = localStorage.getItem("SelectedRoomDetails");
-  console.log(stringData);
 
   return (
     <div className={styles.container}>

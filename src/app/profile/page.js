@@ -2,6 +2,7 @@ import Link from "next/link";
 import UserProfile from "../components/userprofile/UserProfile";
 import styles from "./profile.module.scss";
 import HotelCheckOut from "../components/checkOut/CheckOut";
+import Logout from "../components/Logout";
 
 const page = () => {
   return (
@@ -15,9 +16,7 @@ const page = () => {
             <UserProfile />
           </div>
           <div className={styles.logoutLast}>
-            <Link href="/profile/logout">
-              <button className={styles.logout}>Logout</button>
-            </Link>
+            <Logout />
           </div>
         </div>
         <div className={styles.booking}>

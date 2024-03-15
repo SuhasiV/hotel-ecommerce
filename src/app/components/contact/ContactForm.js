@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import styles from "@/app/styles/contactForm.module.css";
+import styles from "@/app/contact/contact.module.scss";
 import React from "react";
 
 const ContactForm = () => {
@@ -51,9 +51,11 @@ const ContactForm = () => {
   };
 
   return (
-    <div>
-      <form className={styles.form} onSubmit={handleSubmit}>
+    <div className={styles.containerComponent}>
+      <form onSubmit={handleSubmit} className={styles.section}>
         <br />
+
+        <label>Username</label>
         <input
           type="text"
           name="username"
@@ -64,6 +66,7 @@ const ContactForm = () => {
           required
         />
         <br />
+        <label>Email</label>
         <input
           type="text"
           name="email"
@@ -75,6 +78,7 @@ const ContactForm = () => {
           autoComplete="off"
         />
         <br />
+        <label>Phone Number</label>
         <input
           type="number"
           name="phone"
@@ -86,6 +90,7 @@ const ContactForm = () => {
           autoComplete="off"
         />
         <br />
+        <label>Enter your message</label>
         <textarea
           name="message"
           id="message"
@@ -98,16 +103,18 @@ const ContactForm = () => {
         />
         <div>
           {status === "success" && (
-            <p className={styles.success_msg}>Thank you for your message!</p>
+            <p className={styles.success_msg}>
+              Thank you for your message. Our staff will contact you as soon as
+              possible.
+            </p>
           )}
           {status === "error" && (
             <p className={styles.error_msg}>
               There was an error submitting your message. Please try again.
             </p>
           )}
-
-          <button type="submit">Send Message</button>
         </div>
+        <button type="submit">Send Message</button>
       </form>
     </div>
   );

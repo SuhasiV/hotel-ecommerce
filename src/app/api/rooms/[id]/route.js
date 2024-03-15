@@ -31,7 +31,6 @@ export async function GET(req, { params }) {
 export async function PUT(req, { params }) {
   try {
     const { id } = params;
-    console.log(id);
     const body = await req.json();
     await dbConn();
     const room = await Room.findById(id);

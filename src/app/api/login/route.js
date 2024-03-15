@@ -17,14 +17,12 @@ export async function POST(req) {
         { status: 400 }
       );
     }
-    console.log("user exists");
 
     //check password
     const validPassword = await bcryptjs.compare(password, user.password);
     if (!validPassword) {
       return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
-    console.log(user);
     //create token data
     const tokenData = {
       id: user._id,

@@ -4,14 +4,7 @@ const hotelSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-<<<<<<< HEAD
-  },
-  type: {
-    type: String,
-    required: true,
-=======
     unique: true,
->>>>>>> 3b454d8286f5d2f453c85002bc7dd52234cfacc3
   },
   city: {
     type: String,
@@ -19,10 +12,7 @@ const hotelSchema = new mongoose.Schema({
   },
   address: {
     type: [String],
-<<<<<<< HEAD
-=======
     required: true,
->>>>>>> 3b454d8286f5d2f453c85002bc7dd52234cfacc3
   },
   desc: {
     type: [String],
@@ -31,63 +21,6 @@ const hotelSchema = new mongoose.Schema({
   photos: {
     type: [String],
   },
-<<<<<<< HEAD
-
-  features: {
-    gym: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
-    },
-    pool: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
-    },
-    breakfast: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
-    },
-    couplefriendly: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
-    },
-    wifi: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
-    },
-    bar: {
-      available: {
-        type: Boolean,
-        default: false,
-      },
-      imagePath: {
-        type: String,
-      },
-=======
   couplefriendly: {
     type: Boolean,
     default: true,
@@ -130,7 +63,6 @@ const hotelSchema = new mongoose.Schema({
     },
     restId: {
       type: String,
->>>>>>> 3b454d8286f5d2f453c85002bc7dd52234cfacc3
     },
   },
   rating: {
@@ -141,28 +73,10 @@ const hotelSchema = new mongoose.Schema({
   rooms: {
     type: [String],
   },
-<<<<<<< HEAD
-  restId: [
-    {
-      type: String,
-    },
-  ],
-  spaId: [
-    {
-      type: String,
-    },
-  ],
-=======
->>>>>>> 3b454d8286f5d2f453c85002bc7dd52234cfacc3
   cheapestPrice: {
     type: Number,
     required: true,
   },
-<<<<<<< HEAD
-  isfeatured: {
-    type: Boolean,
-    default: false,
-=======
   type: {
     isNew: {
       type: Boolean,
@@ -176,7 +90,6 @@ const hotelSchema = new mongoose.Schema({
       type: Boolean,
       default: false,
     },
->>>>>>> 3b454d8286f5d2f453c85002bc7dd52234cfacc3
   },
 });
 

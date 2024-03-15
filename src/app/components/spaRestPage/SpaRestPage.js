@@ -26,7 +26,7 @@ const SpaRestPage = ({ params }) => {
       try {
         setLoading(true);
         const response = await axios.get(`/api/${url}`);
-        console.log(response?.data?.spa);
+
         dataType == "spa"
           ? setData(response?.data?.spa)
           : setData(response?.data?.rest);
@@ -44,8 +44,6 @@ const SpaRestPage = ({ params }) => {
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
-
-  console.log(data);
 
   return (
     <div className={styles.container}>

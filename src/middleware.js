@@ -18,11 +18,5 @@ export function middleware(request) {
 }
 
 export const config = {
-  matcher: [
-    "/contact",
-    "/profile",
-    "/profile/signup",
-    "/profile/login",
-    "/profile/logout",
-  ],
+  matcher: ["/profile", "/profile/signup", "/profile/login", "/profile/logout"],
 };

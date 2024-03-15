@@ -23,24 +23,6 @@
 
       .logoutLast {
         margin-top: auto;
-        .logout {
-          width: 100%;
-          margin-top: 20px;
-          border-radius: 10px;
-          border: none;
-          padding: 10px;
-          font-size: 18px;
-          background-color: #4a4e69;
-          color: #fff;
-          text-transform: uppercase;
-          transition: all 0.3s;
-          cursor: pointer;
-
-          &:hover {
-            background-color: #9a8c98;
-            color: #fff;
-          }
-        }
       }
     }
     .booking {
@@ -48,5 +30,24 @@
       padding: 35px 45px;
       flex: 3;
     }
+  }
+}
+
+.logout {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  border: none;
+  padding: 10px;
+  font-size: 18px;
+  background-color: #4a4e69;
+  color: #fff;
+  text-transform: uppercase;
+  transition: all 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #9a8c98;
+    color: #fff;
   }
 }

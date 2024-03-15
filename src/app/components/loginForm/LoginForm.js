@@ -119,7 +119,6 @@ const LoginForm = () => {
   const onLogin = async (e) => {
     try {
       const response = await axios.post("/api/login", user);
-      console.log("Login success", response.data);
       router.push("/profile");
     } catch (e) {
       console.log("Login failed", e.message);
