@@ -6,8 +6,8 @@ import { NextResponse } from "next/server";
 export async function GET(req) {
   try {
     await dbConnect();
-    const userId = await getDataFromToken(req);
-    const user = await User.findOne({ _id: userId }).select("-password");
+    const data = getDataFromToken(req); //data will return id and isAdmin
+    const user = await User.findOne({ _id: data.id }).select("-password");
     return NextResponse.json({
       message: "user found",
       data: user,

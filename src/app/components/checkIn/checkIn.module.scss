@@ -1,100 +1,99 @@
 .container {
-  background-color: #e1e1e1;
   width: 100%;
-  height: 60px;
-  display: flex;
-  // position: absolute;
-  // margin-top: -120px;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 17px;
-  border-radius: 5px;
-  padding: 20px;
-}
+  padding: 13px 0px;
+  border-bottom: 1px solid #a0a0a0;
 
-.section {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  cursor: pointer;
-  border-left: solid 1px #8f8f8f;
-  border-right: solid 1px #8f8f8f;
-}
+  .wrapper {
+    margin: 0px auto;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-.sectionLabel {
-  color: #606060;
-  font-size: 18px;
-  margin-bottom: 10px;
-}
+    .section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
 
-.sectionData > span {
-  color: #000 !important;
-  font-size: 28px;
-  font-weight: bold;
-}
+      .icons {
+        color: #4a4e69;
+        font-size: 30px;
+        margin-right: 10px;
+      }
 
-.sectionButton {
-  background-color: #333;
-  color: #fff;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 25px;
-}
+      .largeText {
+        font-size: 18px;
+      }
 
-.largeText > input {
-  margin-top: 0px;
-  height: 40px;
-  width: 100%;
-  border: none;
-  background-color: #e1e1e1;
-  color: #000;
-  font-size: 28px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  font-weight: bold;
-  justify-content: center;
-}
+      input {
+        border: none;
+        font-size: 18px;
+        color: #4a4e69;
 
-.dateRange {
-  position: absolute;
-  z-index: 1;
-  margin-top: 80px;
-}
-.options {
-  z-index: 1;
-  width: 20%;
-  background-color: #fff;
-  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  margin-top: 80px;
-  padding: 20px;
-}
-.subOption {
-  margin: 10px 0px 10px 0px;
-  display: flex;
-  justify-content: space-between;
-}
-.optionValue > button {
-  font-size: 18px;
-  border: none;
-  height: 30px;
-  width: 25px;
-  background-color: #333;
-  color: #fff;
-}
-.optionValue > button:hover {
-  background-color: #e1e1e1;
-  color: #000;
-  border: solid 1px #333;
-  cursor: pointer;
-}
+        &:active {
+          border: none;
+        }
+      }
 
-.optionValue > span {
-  margin: 0px 10px 0px 10px;
+      .options {
+        padding: 20px;
+        background-color: #fff;
+        margin-top: 100px;
+        width: 20%;
+        position: absolute;
+        z-index: 100;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507);
+        .subOption {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          .optionValue {
+            button {
+              cursor: pointer;
+              background-color: #f2e9e4;
+              margin: 0px 10px;
+              width: 25px;
+              height: 30px;
+
+              &:hover {
+                background-color: #4a4e69;
+              }
+            }
+          }
+        }
+      }
+
+      .sectionButton {
+        border-radius: 30px;
+        padding: 10px;
+        height: 100%;
+        width: 100%;
+        background-color: #c9ada7;
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+          background-color: #22223b;
+          color: #fff;
+        }
+
+        .button {
+          text-decoration: none;
+          font-weight: bold;
+          color: #fff;
+        }
+      }
+    }
+
+    .dateRange {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: absolute;
+      margin-top: 450px;
+      z-index: 100;
+    }
+  }
 }

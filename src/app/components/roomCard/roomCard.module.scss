@@ -1,0 +1,73 @@
+.container {
+  margin: 40px 0px;
+  display: flex;
+  border: 1px solid #a0a0a0;
+
+  .left {
+    flex: 1;
+  }
+
+  .right {
+    flex: 1;
+    padding: 20px;
+
+    .desc {
+      display: flex;
+      padding: 0px 20px;
+      .column {
+        flex: 1;
+        ul {
+          padding: 0px;
+          text-decoration: none;
+          list-style: none;
+
+          li {
+            padding: 5px 0px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+          }
+        }
+      }
+    }
+    .grid {
+      padding: 0px 20px 20px 20px;
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fill,
+        minmax(200px, 2fr)
+      ); /* Two items side by side, expanding to fill the container */
+      gap: 10px; /* Gap between grid items */
+
+      .gridCol {
+        padding: 5px 0px;
+        gap: 10px;
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .price {
+      display: flex;
+      justify-content: end;
+      padding: 15px 20px 5px 20px;
+      gap: 10px;
+    }
+  }
+}
+
+.button {
+  margin: 0px 6px;
+  padding: 10px 15px;
+  background-color: #4a4e69;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+  font-weight: 700;
+
+  &:hover {
+    background-color: #22223b;
+  }
+}

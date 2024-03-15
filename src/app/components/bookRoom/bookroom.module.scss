@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  background-color: #22223b;
+  margin: 5% 0%;
+  transition: all 0.3s;
+
+  &:hover .stayDetail {
+    text-shadow:
+      0 0 10px #00f,
+      0 0 50px #00f;
+  }
+
+  .stayDetail {
+    padding: 50px 0px 50px 50px;
+    flex: 1;
+    display: grid;
+    place-items: center;
+    font-size: 50px;
+    color: #f2e9e4;
+  }
+  .section {
+    padding: 50px 50px 50px 0px;
+    display: grid;
+    place-items: center;
+    flex: 1;
+    cursor: pointer;
+
+    .nights {
+      font-size: 22px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2.3px;
+      text-shadow:
+        0 0 10px #00f,
+        0 0 50px #00f;
+    }
+
+    .input {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      width: 50%;
+      color: #000 !important;
+      border-radius: 20px;
+      padding: 10px 20px;
+      input {
+        border: none;
+        font-size: 18px;
+      }
+    }
+  }
+  .checkNow {
+    cursor: pointer;
+    background-color: #c9ada7;
+    font-size: 18px;
+    border-radius: 20px;
+    margin-top: 20px;
+    width: 58%;
+    padding: 10px 20px;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: #f2e9e4;
+    }
+  }
+  .dateRange {
+    position: absolute;
+    top: 4%;
+  }
+}
