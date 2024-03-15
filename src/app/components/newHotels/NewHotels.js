@@ -13,6 +13,7 @@ import "swiper/css/navigation";
 import { Navigation } from "swiper/modules";
 import axios from "axios";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import Link from "next/link";
 
 const NewHotels = () => {
   const [hotels, setHotels] = useState([]);
@@ -53,25 +54,17 @@ const NewHotels = () => {
               hotels.map((item) => (
                 <SwiperSlide key={item.name}>
                   <div className={styles.card}>
-                    <div className={styles.image}>
-                      <div className={styles.img1}>
-                        <Image
-                          src="/hotel1.jpg"
-                          alt="hotel1"
-                          width="100"
-                          height="100"
-                        />
-                      </div>
-                      <div className={styles.img2}>
-                        {" "}
-                        <Image
-                          src="/hotel2.jpg"
-                          alt="hotel2"
-                          width="100"
-                          height="100"
-                        />
-                      </div>
-                    </div>
+                    <div
+                      className={styles.image}
+                      style={{
+                        background:
+                          item && item.photos && item.photos.length > 0
+                            ? `url(/${item.photos[0]})`
+                            : "", // Check if spa and
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }}
+                    ></div>
                     <div className={styles.info}>
                       <div
                         className={styles.title}
@@ -94,7 +87,10 @@ const NewHotels = () => {
                         {}
                       </div>
                       <p>{item.desc}</p>
-                      <button className="buttonBookNow">Book Now</button>
+                      <Link href={`/hotels/${item._id}`} className="link">
+                        {" "}
+                        <button className="buttonBookNow">Book Now</button>
+                      </Link>
                     </div>
                   </div>
                 </SwiperSlide>

@@ -3,6 +3,7 @@
   position: relative;
   width: 100%;
   height: 90vh;
+  overflow: hidden;
 
   .arrow {
     height: 50px;
@@ -18,6 +19,7 @@
     margin: auto;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
 
     &:hover {
       opacity: 1;
@@ -36,7 +38,7 @@
     height: 100%;
     width: 300vw;
     display: flex;
-
+    overflow: hidden;
     transition: transform 0.8s ease-in-out;
 
     .slide {
@@ -83,13 +85,14 @@
       background-size: cover;
     }
     .slide.second {
-      background-image: url("/img/slider1.jpg");
-      background-repeat: none;
+      background-image: url("/jaipurHotel.jpg");
       background-size: cover;
+      background-repeat: none;
+      background-position: bottom;
     }
 
     .slide.third {
-      background-image: url("/img/slider2.jpg");
+      background-image: url("/manaliHotel.jpg");
       background-repeat: none;
       background-size: cover;
     }

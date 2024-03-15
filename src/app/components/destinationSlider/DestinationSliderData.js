@@ -39,6 +39,8 @@ const DestinationSliderDate = ({ type, data }) => {
                 <CardType1
                   city={item.city}
                   state={item.address[item.address.length - 2]}
+                  id={item._id}
+                  photo={item.photos[0]}
                 />
               </SwiperSlide>
             ))}
