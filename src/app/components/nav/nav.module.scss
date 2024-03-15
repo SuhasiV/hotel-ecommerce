@@ -1,0 +1,33 @@
+.header {
+  width: 100%;
+  height: 30px;
+  vertical-align: center;
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0px;
+  background-color: #22223b;
+  color: #f2e9e4;
+  position: fixed;
+  z-index: 1000;
+}
+.container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+}
+.nav_link {
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  color: #f2e9e4;
+  margin-left: 40px;
+  text-transform: uppercase;
+}
