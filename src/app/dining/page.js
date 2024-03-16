@@ -6,7 +6,7 @@ const page = () => {
   return (
     <div>
       <Suspense fallback={<div>Loading...</div>}>
-        <div style={{ paddingTop: "65px" }}></div>
+        <div style={{ paddingTop: "5%" }}></div>
         <CheckInTry type="rest" />
         <div>
           <RestList />
