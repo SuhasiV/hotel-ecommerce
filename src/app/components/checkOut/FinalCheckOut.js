@@ -7,10 +7,11 @@ import { format } from "date-fns";
 import Link from "next/link";
 import { SearchContext } from "@/app/context/SearchContext";
 import { useRouter } from "next/navigation";
+import { dateRange } from "@/app/helpers/dateRange";
 
 const FinalCheckOut = () => {
   const stringData = localStorage.getItem("SelectedRoomDetails");
-  const { hotelId, roomId, allDates, rooms, availableRoomList } =
+  const { hotelId, roomId, allDates, rooms, roomIdsToUpdate } =
     JSON.parse(stringData);
   const { dispatch } = useContext(SearchContext);
   const router = useRouter();
@@ -41,22 +42,13 @@ const FinalCheckOut = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  const availableRoomIds = availableRoomList.reduce((acc, obj) => {
-    for (let key in obj) {
-      if (obj[key] === true) {
-        acc.push(key);
-      }
-    }
-    return acc;
-  }, []);
-
   const handleBookNow = async () => {
     try {
-      const response = await axios.put(
-        `api/rooms/${roomId}`,
-        availableRoomIds,
-        allDates
-      );
+      const response = await axios.put(`api/rooms/${roomId}`, {
+        roomIdsToUpdate,
+        allDates: allDates,
+      });
+      router.push("/profile/success");
     } catch (err) {
       console.log(err.message);
     }
@@ -65,6 +57,8 @@ const FinalCheckOut = () => {
     dispatch({ type: "CANCEL" });
     router.push("/");
   };
+
+  console.log(allDates[0]);
 
   return (
     <div>

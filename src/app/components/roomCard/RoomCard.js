@@ -11,7 +11,7 @@ import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { SearchContext } from "@/app/context/SearchContext";
 import { useRouter } from "next/navigation";
-import { dateRange } from "@/app/helpers/dateRange";
+import { availableRoom, dateRange } from "@/app/helpers/dateRange";
 
 const RoomCard = ({ data }) => {
   const router = useRouter();
@@ -43,6 +43,8 @@ const RoomCard = ({ data }) => {
     setAllDates(alldatesacq);
   }, [data, date]);
 
+  console.log("date", date);
+
   if (loadin) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -69,70 +71,23 @@ const RoomCard = ({ data }) => {
     },
   ];
 
-  // const getDatesInRange = (startDate, endDate) => {
-  //   const start = new Date(startDate);
-
-  //   const end = new Date(endDate);
-
-  //   const date = new Date(start.getTime());
-
-  //   const dates = [];
-
-  //   while (date <= end) {
-  //     dates.push(new Date(date.getTime()));
-  //     date.setDate(date.getDate() + 1);
-  //   }
-  //   return dates;
-  // };
-
-  // const alldates = getDatesInRange(date[0]?.startDate, date[0]?.endDate);
-
-  // const availableRoom = () => {
-  //   const availableRoomList = [{}];
-  //   let trueCount = 0;
-  //   room?.roomNumbers?.map((item) => {
-  //     const isFound = item.unavailableDates.some((date) =>
-  //       alldates.includes(new Date(date).getTime())
-  //     );
-  //     availableRoomList.push({ [item._id]: !isFound });
-  //     if (!isFound) {
-  //       trueCount++; // Increment count if true is encountered
-  //     }
-  //   });
-  //   const trueCountNum = parseInt(trueCount);
-  //   const trueRoomNum = parseInt(option.room);
-  //   if (trueCountNum >= trueRoomNum) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // };
-
-  // const isAvailable = availableRoom();
-
-  const availableRoom = (alldates, roomNumbers, room) => {
-    const availableRoomList = [{}];
-    let trueCount = 0;
-    roomNumbers?.map((singleRoomNum) => {
-      const isFound = singleRoomNum.unavailableDates.some((date) =>
-        alldates.includes(new Date(date).getTime())
-      );
-      availableRoomList.push({ [singleRoomNum._id]: !isFound });
-      if (!isFound) {
-        trueCount++; // Increment count if true is encountered
-      }
-    });
-    const trueCountNum = parseInt(trueCount);
-    const trueRoomNum = parseInt(room);
-    if (trueCountNum >= trueRoomNum) {
-      return { roomsAvailable: true, availableRoomList };
-    } else {
-      return { roomsAvailable: false };
-    }
-  };
-
   const isAvailable = availableRoom(alldates, room?.roomNumbers, option.room);
-  const availableRoomList = isAvailable.availableRoomList;
+  const availableRoomList = isAvailable.roomsAvailable
+    ? isAvailable.availableRoomList
+    : [];
+
+  const roomIdsToUpdate = Object.values(availableRoomList).reduce(
+    (acc, value) => {
+      if (acc.length < option.room) {
+        acc.push(value);
+      }
+
+      return acc;
+    },
+    []
+  );
+
+  console.log(alldates);
 
   const handleBookNow = () => {
     const selectedRoomDetails = {
@@ -140,7 +95,7 @@ const RoomCard = ({ data }) => {
       roomId: room._id,
       allDates: alldates,
       rooms: option.room,
-      availableRoomList,
+      roomIdsToUpdate,
     };
     dispatch({ type: "BOOK", payload: selectedRoomDetails });
     router.push("/profile");

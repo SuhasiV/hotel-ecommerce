@@ -17,21 +17,22 @@ export const dateRange = (date) => {
 };
 
 export const availableRoom = (alldates, roomNumbers, room) => {
-  const availableRoomList = [{}];
+  const availableRoomList = [];
   let trueCount = 0;
   roomNumbers?.map((item) => {
-    const isFound = item.unavailableDates.some((date) =>
+    const isDateFound = item.unavailableDates.some((date) =>
       alldates.includes(new Date(date).getTime())
     );
-    availableRoomList.push({ [item._id]: !isFound });
-    if (!isFound) {
+
+    if (!isDateFound) {
+      availableRoomList.push(item._id);
       trueCount++; // Increment count if true is encountered
     }
   });
   const trueCountNum = parseInt(trueCount);
   const trueRoomNum = parseInt(room);
   if (trueCountNum >= trueRoomNum) {
-    return { roomsAvailable: true, availableRoomList };
+    return { roomsAvailable: true, availableRoomList, trueCount };
   } else {
     return { roomsAvailable: false };
   }

@@ -19,7 +19,7 @@ export async function POST(req, { params }) {
     const updatedHotel = await Hotel.findByIdAndUpdate(
       hotelId,
       {
-        $set: { "facilities.SpaId": newSpa._id }, // Use $set to update the restId object
+        $set: { "facilities.spaId": newSpa._id }, // Use $set to update the restId object
       },
       { new: true }
     );

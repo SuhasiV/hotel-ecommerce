@@ -4,7 +4,12 @@ import { createContext, useReducer } from "react";
 
 const INITIAL_STATE = {
   destination: undefined,
-  date: [],
+  date: [
+    {
+      startDate: new Date(),
+      endDate: new Date(new Date().getTime() + 24 * 60 * 60 * 1000),
+    },
+  ],
   option: {
     room: 1,
   },

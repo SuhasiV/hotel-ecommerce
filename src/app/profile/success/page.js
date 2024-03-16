@@ -1,5 +1,6 @@
 import SuccessButton from "@/app/components/successButton/SuccessButton";
 import styles from "../general.module.scss";
+import { useContext } from "react";
 
 const page = () => {
   return (

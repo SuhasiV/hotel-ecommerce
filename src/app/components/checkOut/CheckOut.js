@@ -3,15 +3,20 @@
 import Link from "next/link";
 import FinalCheckOut from "./FinalCheckOut";
 import styles from "./checkOut.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const HotelCheckOut = () => {
   const [data, setData] = useState();
   // const stringData = localStorage.getItem("SelectedRoomDetails");
-  if (typeof window !== "undefined") {
-    const item = localStorage.getItem("SelectedRoomDetails");
-    setData(item);
-  }
+  const [isDataFetched, setIsDataFetched] = useState(false);
+
+  useEffect(() => {
+    if (!isDataFetched && typeof window !== "undefined") {
+      const item = localStorage.getItem("SelectedRoomDetails");
+      setData(item);
+      setIsDataFetched(true);
+    }
+  }, [isDataFetched]);
 
   return (
     <div className={styles.container}>

@@ -51,7 +51,8 @@ export async function PUT(req, { params }) {
       }
     });
 
-    await room.save();
+    const newRoom = await room.save();
+    console.log(newRoom);
 
     return NextResponse.json({
       message: "Room updated sucessfully",

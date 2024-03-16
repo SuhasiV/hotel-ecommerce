@@ -1,15 +1,16 @@
 "use client";
 import Link from "next/link";
 import styles from "./successButton.module.scss";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { SearchContext } from "@/app/context/SearchContext";
 const SuccessButton = () => {
   const { dispatch } = useContext(SearchContext);
-  const handleSuccess = () => {
+
+  useEffect(() => {
     dispatch({ type: "CANCEL" });
-  };
+  }, [dispatch]);
   return (
-    <Link href="/" style={{ textDecoration: "none" }} onClick={handleSuccess}>
+    <Link href="/" style={{ textDecoration: "none" }}>
       <button className={styles.button}>Explore More</button>
     </Link>
   );

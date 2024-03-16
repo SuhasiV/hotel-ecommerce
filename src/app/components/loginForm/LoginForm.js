@@ -90,16 +90,15 @@
 // export default LoginForm;
 
 "use client";
-import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { NextResponse } from "next/server";
 import styles from "./loginForm.module.scss";
 import axios from "axios";
 import Link from "next/link";
+import { useState } from "react";
 
 const LoginForm = () => {
   const router = useRouter();
-  const [user, setUser] = React.useState({
+  const [user, setUser] = useState({
     email: "",
     password: "",
   });
