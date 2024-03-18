@@ -8,7 +8,9 @@ import { useContext } from "react";
 import { UserContext } from "@/app/context/UserContext";
 
 export const Nav = () => {
-  const { name } = useContext(UserContext);
+  const loggedInUser = localStorage.getItem("LoggedInUser");
+  const name = loggedInUser && JSON.parse(loggedInUser).name;
+
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -61,7 +63,7 @@ export const Nav = () => {
               {" "}
               <button>
                 {" "}
-                <div>{name ? name : null}</div>
+                <div>{name && name}</div>
                 <div>
                   <PersonIcon />
                 </div>

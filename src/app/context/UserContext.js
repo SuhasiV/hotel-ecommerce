@@ -14,8 +14,10 @@ export const UserContext = createContext(USER);
 const UserReducer = (state, action) => {
   switch (action.type) {
     case "LOGOUT":
+      localStorage.removeItem("LoggedInUser");
       return USER;
     case "LOGIN":
+      localStorage.setItem("LoggedInUser", JSON.stringify(action.payload));
       return { ...state, ...action.payload };
     default:
       return state;

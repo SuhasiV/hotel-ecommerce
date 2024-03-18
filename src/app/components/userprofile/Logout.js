@@ -24,11 +24,18 @@ const Logout = ({ status }) => {
       console.log(err.message);
     }
   };
+
+  const handleGoogleUserLogout = () => {
+    signOut();
+    dispatch({ type: "CANCEL" });
+    dispatchUserData({ type: "LOGOUT" });
+    router.push("/profile/login");
+  };
   return (
     <div>
       {" "}
       {status === "authenticated" ? (
-        <button className="buttonDarkBlue" onClick={() => signOut()}>
+        <button className="buttonDarkBlue" onClick={handleGoogleUserLogout}>
           Google Log Out
         </button>
       ) : (
