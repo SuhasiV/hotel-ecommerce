@@ -14,7 +14,7 @@ export async function POST(req) {
     if (!user) {
       return NextResponse.json(
         { error: "User does not exist" },
-        { status: 400 }
+        { status: 401 }
       );
     }
 
@@ -26,7 +26,7 @@ export async function POST(req) {
     //create token data
     const tokenData = {
       id: user._id,
-      username: user.username,
+      username: user.name,
       isAdmin: user.isAdmin,
     };
 

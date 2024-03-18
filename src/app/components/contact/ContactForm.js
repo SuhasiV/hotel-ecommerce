@@ -1,9 +1,13 @@
 "use client";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import styles from "@/app/contact/contact.module.scss";
 import React from "react";
+import { AuthContext } from "@/app/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 const ContactForm = () => {
+  // const { logOut } = useContext(AuthContext);
+  const router = useRouter();
   const [user, setUser] = useState({
     username: "",
     email: "",
@@ -50,8 +54,18 @@ const ContactForm = () => {
     }
   };
 
+  // const handleLogout = async () => {
+  //   try {
+  //     await logOut();
+  //     router.push("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   return (
     <div className={styles.containerComponent}>
+      {/* <button onClick={handleLogout}>Logout</button> */}
       <form onSubmit={handleSubmit} className={styles.section}>
         <br />
 

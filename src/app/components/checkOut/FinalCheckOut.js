@@ -8,6 +8,7 @@ import Link from "next/link";
 import { SearchContext } from "@/app/context/SearchContext";
 import { useRouter } from "next/navigation";
 import { dateRange } from "@/app/helpers/dateRange";
+import BookNow from "./BookNow";
 
 const FinalCheckOut = () => {
   const stringData = localStorage.getItem("SelectedRoomDetails");
@@ -42,23 +43,10 @@ const FinalCheckOut = () => {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  const handleBookNow = async () => {
-    try {
-      const response = await axios.put(`api/rooms/${roomId}`, {
-        roomIdsToUpdate,
-        allDates: allDates,
-      });
-      router.push("/profile/success");
-    } catch (err) {
-      console.log(err.message);
-    }
-  };
   const handleCancel = () => {
     dispatch({ type: "CANCEL" });
     router.push("/");
   };
-
-  console.log(allDates[0]);
 
   return (
     <div>
@@ -124,9 +112,12 @@ const FinalCheckOut = () => {
           >
             <div className={styles.bookNowButton}>Other Dates</div>
           </Link>
-          <div className={styles.bookNowButton} onClick={handleBookNow}>
-            Book Now
-          </div>
+          <BookNow
+            roomId={roomId}
+            roomIdsToUpdate={roomIdsToUpdate}
+            allDates={allDates}
+            price={room.price * rooms * (allDates.length - 1)}
+          />
           <div
             className={styles.bookNowButton}
             style={{ background: "#720026" }}

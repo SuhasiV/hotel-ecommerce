@@ -1,10 +1,14 @@
+"use client";
 import Link from "next/link";
 import React from "react";
 import styles from "@/app/components/nav/nav.module.scss";
 import Image from "next/image";
 import PersonIcon from "@mui/icons-material/Person";
+import { useContext } from "react";
+import { UserContext } from "@/app/context/UserContext";
 
 export const Nav = () => {
+  const { name } = useContext(UserContext);
   return (
     <header className={styles.header}>
       <div className={styles.container}>
@@ -24,23 +28,46 @@ export const Nav = () => {
             />
           </Link>
         </div>
-        <div>
-          <Link href="/hotels" className={styles.nav_link}>
-            Our Hotels
-          </Link>
-          <Link href="/dining" className={styles.nav_link}>
-            Dining
-          </Link>
-          <Link href="/spa" className={styles.nav_link}>
-            Spa
-          </Link>
-          <Link href="/contact" className={styles.nav_link}>
-            Contact
-          </Link>
+        <div className={styles.tabs}>
+          <div>
+            {" "}
+            <Link href="/hotels" className={styles.nav_link}>
+              Our Hotels
+            </Link>
+          </div>
+          <div>
+            {" "}
+            <Link href="/dining" className={styles.nav_link}>
+              Dining
+            </Link>
+          </div>
 
-          <Link href="/profile" className={styles.nav_link} style={{}}>
-            <PersonIcon />
-          </Link>
+          <div>
+            {" "}
+            <Link href="/spa" className={styles.nav_link}>
+              Spa
+            </Link>
+          </div>
+
+          <div>
+            <Link href="/contact" className={styles.nav_link}>
+              Contact
+            </Link>
+          </div>
+
+          <div className={styles.button}>
+            {" "}
+            <Link href="/profile" className={styles.nav_link}>
+              {" "}
+              <button>
+                {" "}
+                <div>{name ? name : null}</div>
+                <div>
+                  <PersonIcon />
+                </div>
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </header>

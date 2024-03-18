@@ -43,8 +43,6 @@ const RoomCard = ({ data }) => {
     setAllDates(alldatesacq);
   }, [data, date]);
 
-  console.log("date", date);
-
   if (loadin) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
@@ -86,8 +84,6 @@ const RoomCard = ({ data }) => {
     },
     []
   );
-
-  console.log(alldates);
 
   const handleBookNow = () => {
     const selectedRoomDetails = {

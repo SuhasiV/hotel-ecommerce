@@ -15,9 +15,9 @@ const page = () => {
             <hr />
             <UserProfile />
           </div>
-          <div className={styles.logoutLast}>
+          {/* <div className={styles.logoutLast}>
             <Logout />
-          </div>
+          </div> */}
         </div>
         <div className={styles.booking}>
           <HotelCheckOut />

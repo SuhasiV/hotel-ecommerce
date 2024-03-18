@@ -6,7 +6,9 @@ const page = () => {
     <div className={styles.container}>
       <div className={styles.flex}></div>
       <div className={styles.flex}>
-        <h1 className="title1">Signup Page</h1>
+        <h1 className="title1" style={{ marginBottom: "0px" }}>
+          Signup
+        </h1>
         <SignupForm />
       </div>
     </div>

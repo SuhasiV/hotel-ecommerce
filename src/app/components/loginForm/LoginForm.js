@@ -94,10 +94,16 @@ import { useRouter } from "next/navigation";
 import styles from "./loginForm.module.scss";
 import axios from "axios";
 import Link from "next/link";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "@/app/context/AuthContext";
+import { signIn, signOut, useSession } from "next-auth/react";
+import GoogleIcon from "@mui/icons-material/Google";
 
 const LoginForm = () => {
   const router = useRouter();
+
+  // const { googleSignIn } = useContext(AuthContext);
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -117,9 +123,17 @@ const LoginForm = () => {
 
   const onLogin = async (e) => {
     try {
+      // await googleSignIn();
       const response = await axios.post("/api/login", user);
       router.push("/profile");
     } catch (e) {
+      if (e.response.status === 401) {
+        alert("User does not exist please signup.");
+        router.push("/profile/signup");
+      }
+      if (e.response.status === 400) {
+        alert("Wrong password. To reset password please contact us.");
+      }
       console.log("Login failed", e.message);
     }
   };

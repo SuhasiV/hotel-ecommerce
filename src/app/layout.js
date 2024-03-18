@@ -7,6 +7,9 @@ import { Raleway } from "next/font/google";
 import { SelectedQueryProvider } from "./helpers/selectedSearchQuery";
 import { SearchContextProvider } from "./context/SearchContext";
 import { BookRoomContextProvider } from "./context/BookedRoomContext";
+import { AuthContextProvider } from "./context/AuthContext";
+import { NextAuthProvider } from "./context/Provider";
+import { UserContextProvider } from "./context/UserContext";
 
 const raleway = Raleway({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -34,15 +37,22 @@ export default function RootLayout({ children }) {
     // </html>
     <html lang="en" className={raleway.className}>
       <Head></Head>
-      <SearchContextProvider>
-        <BookRoomContextProvider>
-          <body>
-            <Nav />
-            {children}
-            <Footer />
-          </body>
-        </BookRoomContextProvider>
-      </SearchContextProvider>
+      {/* <AuthContextProvider> */}
+      <UserContextProvider>
+        <NextAuthProvider>
+          <SearchContextProvider>
+            <BookRoomContextProvider>
+              <body>
+                <Nav />
+                {children}
+                <Footer />
+              </body>
+            </BookRoomContextProvider>
+          </SearchContextProvider>
+        </NextAuthProvider>
+      </UserContextProvider>
+
+      {/* </AuthContextProvider> */}
     </html>
   );
 }

@@ -7,16 +7,20 @@ export function middleware(request) {
   const isPublicPath = path === "/profile/login" || path === "/profile/signup";
 
   const token = request.cookies.get("token")?.value || "";
+  const googleToken =
+    request.cookies.get("next-auth.session-token")?.value || "";
 
-  if (isPublicPath && token) {
-    return NextResponse.redirect(new URL("/profile/logout", request.nextUrl));
+  const finalToken = token || googleToken ? true : false;
+
+  if (isPublicPath && finalToken) {
+    return NextResponse.redirect(new URL("/profile", request.nextUrl));
   }
 
-  if (!isPublicPath && !token) {
+  if (!isPublicPath && !finalToken) {
     return NextResponse.redirect(new URL("/profile/login", request.nextUrl));
   }
 }
 
 export const config = {
-  matcher: ["/profile", "/profile/signup", "/profile/login", "/profile/logout"],
+  matcher: ["/profile", "/profile/signup", "/profile/login", "/profile"],
 };

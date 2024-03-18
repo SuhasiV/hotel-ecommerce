@@ -4,6 +4,9 @@ import React from "react";
 import { useRouter } from "next/navigation";
 import styles from "./loginForm.module.scss";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import GoogleIcon from "@mui/icons-material/Google";
+import axios from "axios";
 
 const SignupForm = () => {
   const router = useRouter();
@@ -26,28 +29,32 @@ const SignupForm = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch("/api/signup", {
-        method: "POST",
-        headers: { Content_Type: "application/json" },
-        body: JSON.stringify({
-          username: user.username,
-          email: user.email,
-          password: user.password,
-        }),
+      const response = await axios.post("/api/signup", {
+        name: user.username,
+        email: user.email,
+        password: user.password,
+        signUpType: "website",
       });
+
+      console.log(response.status);
       // Set the status based on the response from the API route
-      if (response.status === 200) {
+      if (response.status == 200) {
         setUser({
           username: "",
           email: "",
           password: "",
         });
-        router.push("/profile/login");
+        router.push("/profile");
       } else {
         setStatus("error");
       }
     } catch (e) {
-      console.log(e);
+      if (e.response.status == 400) {
+        alert("User already exist. Please login");
+        router.push("/profile/login");
+      } else {
+        console.log(e.response);
+      }
     }
   };
 
@@ -95,7 +102,19 @@ const SignupForm = () => {
         </div>
         <div>
           {status === "error" && <p>There was an error. Please try again.</p>}
-          <button type="submit">Signup</button>
+          <button type="submit">Sign Up</button>
+          <button
+            onClick={() => signIn("google")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "5px",
+            }}
+          >
+            <GoogleIcon />
+            Signup with Google
+          </button>
           <br /> <br />
           <div style={{ textAlign: "center" }}>
             {" "}
@@ -106,7 +125,7 @@ const SignupForm = () => {
             <button>Login</button>
           </Link>
         </div>
-      </form>
+      </form>{" "}
     </div>
   );
 };
