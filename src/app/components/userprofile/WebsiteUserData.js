@@ -1,9 +1,8 @@
 "use client";
 import styles from "./userProfile.module.scss";
-import { UserContext } from "@/app/context/UserContext";
 import { useSetUserContextData } from "@/app/helpers/setUserContextData";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const WebsiteUserData = () => {
   const [user, setUser] = useState({});

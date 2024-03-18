@@ -1,15 +1,22 @@
 "use client";
+
 import Link from "next/link";
-import React from "react";
 import styles from "@/app/components/nav/nav.module.scss";
 import Image from "next/image";
 import PersonIcon from "@mui/icons-material/Person";
-import { useContext } from "react";
-import { UserContext } from "@/app/context/UserContext";
+import { useEffect, useState } from "react";
 
 export const Nav = () => {
-  const loggedInUser = localStorage.getItem("LoggedInUser");
-  const name = loggedInUser && JSON.parse(loggedInUser).name;
+  const [name, setName] = useState(null);
+  useEffect(() => {
+    if (typeof localStorage !== "undefined") {
+      const loggedInUser = localStorage.getItem("LoggedInUser");
+      if (loggedInUser) {
+        const userDetails = JSON.parse(loggedInUser);
+        setName(userDetails.name);
+      }
+    }
+  }, []);
 
   return (
     <header className={styles.header}>
@@ -63,7 +70,7 @@ export const Nav = () => {
               {" "}
               <button>
                 {" "}
-                <div>{name && name}</div>
+                <div>{name}</div>
                 <div>
                   <PersonIcon />
                 </div>
