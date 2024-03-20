@@ -10,6 +10,7 @@ import { BookRoomContextProvider } from "./context/BookedRoomContext";
 import { AuthContextProvider } from "./context/AuthContext";
 import { NextAuthProvider } from "./context/Provider";
 import { UserContextProvider } from "./context/UserContext";
+import Script from "next/script";
 
 const raleway = Raleway({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -51,7 +52,7 @@ export default function RootLayout({ children }) {
           </SearchContextProvider>
         </NextAuthProvider>
       </UserContextProvider>
-
+      <Script src="https://checkout.razorpay.com/v1/checkout.js"></Script>
       {/* </AuthContextProvider> */}
     </html>
   );

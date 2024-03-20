@@ -8,16 +8,14 @@ const page = () => {
       <div className={styles.message}>
         {" "}
         <div className={styles.success}>
-          <span className="title1">
-            Thank you for choosing to book your stay with
-            <br /> IMPERIAL HOTELS{" "}
+          <span className="title1" style={{ color: "red" }}>
+            Payment Failed
           </span>
 
           <span className="title2" style={{ color: "#4a4e69" }}>
-            Were delighted to have you as our guest and look forward to
-            providing you with a memorable and comfortable experience
+            Please try again after sometime or contact us.
           </span>
-          <SuccessButton type="success" />
+          <SuccessButton type="failed" />
         </div>
       </div>
     </div>

@@ -4,22 +4,34 @@ const paymentSchema = new mongoose.Schema(
   {
     orderId: {
       type: String,
-      required: true,
     },
     userId: {
       type: String,
-      required: true,
     },
-    emailId: {
+    email: {
       type: String,
-      required: true,
     },
-    info: {
-      roomIdsBooked: [String],
+    roomIdsBooked: {
+      type: [String],
+    },
+    amount: {
+      type: Number,
     },
     paid: {
       type: Boolean,
       default: false,
+    },
+    razorpay_order_id: {
+      type: String,
+      default: null,
+    },
+    razorpay_payment_id: {
+      type: String,
+      default: null,
+    },
+    razorpay_signature: {
+      type: String,
+      default: null,
     },
   },
   {
